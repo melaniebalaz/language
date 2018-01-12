@@ -4,9 +4,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AdvancedCalculatorVisitorImpl extends AdvancedCalculatorBaseVisitor<BigDecimal> {
+
+
+
     @Override
     public BigDecimal visitNum(AdvancedCalculatorParser.NumContext ctx) {
         return new BigDecimal(ctx.NUMBER().getText());
+    }
+
+    @Override
+    public String visitVar(AdvancedCalculatorParser.VarContext ctx){
+        return new String(ctx.VARIABLE().getText());
     }
 
     @Override

@@ -8,6 +8,8 @@ grammar AdvancedCalculator;
 // Eine Zuweisung (t = …)
 // Eine Expression (1 + 2 * s / u - 1)
 
+program     : (statement NEWLINE)+;
+
 statement   : expression                            # operation
             | VARIABLE '=' expression               # assignment
             ;
@@ -19,8 +21,6 @@ expression  : '(' expression ')'                    # parens
             | VARIABLE                              # var //Expression can be a variable
             ;
 
-program     : // ...
-            ;
 
 NUMBER      :   DIGIT* '.' DIGIT+
             |   DIGIT+
