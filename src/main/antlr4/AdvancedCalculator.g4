@@ -8,7 +8,8 @@ grammar AdvancedCalculator;
 // Eine Zuweisung (t = …)
 // Eine Expression (1 + 2 * s / u - 1)
 
-program     : (statement NEWLINE)+;
+program     : (statement NEWLINE)+                  #start
+            ;
 
 statement   : expression                            # operation
             | VARIABLE '=' expression               # assignment
