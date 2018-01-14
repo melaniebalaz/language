@@ -1,5 +1,4 @@
-// Generated from Calculator.g4 by ANTLR 4.3
-import org.antlr.v4.runtime.misc.NotNull;
+// Generated from Calculator.g4 by ANTLR 4.7.1
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -12,50 +11,47 @@ public interface CalculatorListener extends ParseTreeListener {
 	 * labeled alternative in {@link CalculatorParser#expression}.
 	 * @param ctx the parse tree
 	 */
-	void enterParens(@NotNull CalculatorParser.ParensContext ctx);
+	void enterParens(CalculatorParser.ParensContext ctx);
 	/**
 	 * Exit a parse tree produced by the {@code parens}
 	 * labeled alternative in {@link CalculatorParser#expression}.
 	 * @param ctx the parse tree
 	 */
-	void exitParens(@NotNull CalculatorParser.ParensContext ctx);
-
+	void exitParens(CalculatorParser.ParensContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code num}
 	 * labeled alternative in {@link CalculatorParser#expression}.
 	 * @param ctx the parse tree
 	 */
-	void enterNum(@NotNull CalculatorParser.NumContext ctx);
+	void enterNum(CalculatorParser.NumContext ctx);
 	/**
 	 * Exit a parse tree produced by the {@code num}
 	 * labeled alternative in {@link CalculatorParser#expression}.
 	 * @param ctx the parse tree
 	 */
-	void exitNum(@NotNull CalculatorParser.NumContext ctx);
-
+	void exitNum(CalculatorParser.NumContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code addSub}
 	 * labeled alternative in {@link CalculatorParser#expression}.
 	 * @param ctx the parse tree
 	 */
-	void enterAddSub(@NotNull CalculatorParser.AddSubContext ctx);
+	void enterAddSub(CalculatorParser.AddSubContext ctx);
 	/**
 	 * Exit a parse tree produced by the {@code addSub}
 	 * labeled alternative in {@link CalculatorParser#expression}.
 	 * @param ctx the parse tree
 	 */
-	void exitAddSub(@NotNull CalculatorParser.AddSubContext ctx);
-
+	void exitAddSub(CalculatorParser.AddSubContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code mulDiv}
 	 * labeled alternative in {@link CalculatorParser#expression}.
 	 * @param ctx the parse tree
 	 */
-	void enterMulDiv(@NotNull CalculatorParser.MulDivContext ctx);
+	void enterMulDiv(CalculatorParser.MulDivContext ctx);
 	/**
 	 * Exit a parse tree produced by the {@code mulDiv}
 	 * labeled alternative in {@link CalculatorParser#expression}.
 	 * @param ctx the parse tree
 	 */
-	void exitMulDiv(@NotNull CalculatorParser.MulDivContext ctx);
+	void exitMulDiv(CalculatorParser.MulDivContext ctx);
 }

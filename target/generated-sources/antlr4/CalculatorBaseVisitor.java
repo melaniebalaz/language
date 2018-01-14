@@ -1,5 +1,4 @@
-// Generated from Calculator.g4 by ANTLR 4.3
-import org.antlr.v4.runtime.misc.NotNull;
+// Generated from Calculator.g4 by ANTLR 4.7.1
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 
 /**
@@ -17,29 +16,26 @@ public class CalculatorBaseVisitor<T> extends AbstractParseTreeVisitor<T> implem
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitParens(@NotNull CalculatorParser.ParensContext ctx) { return visitChildren(ctx); }
-
+	@Override public T visitParens(CalculatorParser.ParensContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitNum(@NotNull CalculatorParser.NumContext ctx) { return visitChildren(ctx); }
-
+	@Override public T visitNum(CalculatorParser.NumContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitAddSub(@NotNull CalculatorParser.AddSubContext ctx) { return visitChildren(ctx); }
-
+	@Override public T visitAddSub(CalculatorParser.AddSubContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitMulDiv(@NotNull CalculatorParser.MulDivContext ctx) { return visitChildren(ctx); }
+	@Override public T visitMulDiv(CalculatorParser.MulDivContext ctx) { return visitChildren(ctx); }
 }

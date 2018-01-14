@@ -1,5 +1,4 @@
-// Generated from Calculator.g4 by ANTLR 4.3
-import org.antlr.v4.runtime.misc.NotNull;
+// Generated from Calculator.g4 by ANTLR 4.7.1
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
@@ -16,29 +15,26 @@ public interface CalculatorVisitor<T> extends ParseTreeVisitor<T> {
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitParens(@NotNull CalculatorParser.ParensContext ctx);
-
+	T visitParens(CalculatorParser.ParensContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code num}
 	 * labeled alternative in {@link CalculatorParser#expression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitNum(@NotNull CalculatorParser.NumContext ctx);
-
+	T visitNum(CalculatorParser.NumContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code addSub}
 	 * labeled alternative in {@link CalculatorParser#expression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAddSub(@NotNull CalculatorParser.AddSubContext ctx);
-
+	T visitAddSub(CalculatorParser.AddSubContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code mulDiv}
 	 * labeled alternative in {@link CalculatorParser#expression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitMulDiv(@NotNull CalculatorParser.MulDivContext ctx);
+	T visitMulDiv(CalculatorParser.MulDivContext ctx);
 }

@@ -1,5 +1,4 @@
-// Generated from AdvancedCalculator.g4 by ANTLR 4.3
-import org.antlr.v4.runtime.misc.NotNull;
+// Generated from AdvancedCalculator.g4 by ANTLR 4.7.1
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 
 /**
@@ -17,61 +16,54 @@ public class AdvancedCalculatorBaseVisitor<T> extends AbstractParseTreeVisitor<T
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitParens(@NotNull AdvancedCalculatorParser.ParensContext ctx) { return visitChildren(ctx); }
-
+	@Override public T visitStart(AdvancedCalculatorParser.StartContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitAssignment(@NotNull AdvancedCalculatorParser.AssignmentContext ctx) { return visitChildren(ctx); }
-
+	@Override public T visitOperation(AdvancedCalculatorParser.OperationContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitVar(@NotNull AdvancedCalculatorParser.VarContext ctx) { return visitChildren(ctx); }
-
+	@Override public T visitAssignment(AdvancedCalculatorParser.AssignmentContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitNum(@NotNull AdvancedCalculatorParser.NumContext ctx) { return visitChildren(ctx); }
-
+	@Override public T visitParens(AdvancedCalculatorParser.ParensContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitStart(@NotNull AdvancedCalculatorParser.StartContext ctx) { return visitChildren(ctx); }
-
+	@Override public T visitVar(AdvancedCalculatorParser.VarContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitAddSub(@NotNull AdvancedCalculatorParser.AddSubContext ctx) { return visitChildren(ctx); }
-
+	@Override public T visitNum(AdvancedCalculatorParser.NumContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitOperation(@NotNull AdvancedCalculatorParser.OperationContext ctx) { return visitChildren(ctx); }
-
+	@Override public T visitAddSub(AdvancedCalculatorParser.AddSubContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitMulDiv(@NotNull AdvancedCalculatorParser.MulDivContext ctx) { return visitChildren(ctx); }
+	@Override public T visitMulDiv(AdvancedCalculatorParser.MulDivContext ctx) { return visitChildren(ctx); }
 }

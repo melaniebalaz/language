@@ -1,4 +1,4 @@
-// Generated from Calculator.g4 by ANTLR 4.3
+// Generated from Calculator.g4 by ANTLR 4.7.1
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -10,28 +10,60 @@ import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
 public class CalculatorParser extends Parser {
-	static { RuntimeMetaData.checkVersion("4.3", RuntimeMetaData.VERSION); }
+	static { RuntimeMetaData.checkVersion("4.7.1", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		T__5=1, T__4=2, T__3=3, T__2=4, T__1=5, T__0=6, NUMBER=7, DIGIT=8, WS=9;
-	public static final String[] tokenNames = {
-		"<INVALID>", "'/'", "'('", "')'", "'*'", "'+'", "'-'", "NUMBER", "DIGIT", 
-		"WS"
-	};
+		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, NUMBER=7, DIGIT=8, WS=9;
 	public static final int
 		RULE_expression = 0;
 	public static final String[] ruleNames = {
 		"expression"
 	};
 
-	@Override
-	public String getGrammarFileName() { return "Calculator.g4"; }
+	private static final String[] _LITERAL_NAMES = {
+		null, "'('", "')'", "'*'", "'/'", "'+'", "'-'"
+	};
+	private static final String[] _SYMBOLIC_NAMES = {
+		null, null, null, null, null, null, null, "NUMBER", "DIGIT", "WS"
+	};
+	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
+
+	/**
+	 * @deprecated Use {@link #VOCABULARY} instead.
+	 */
+	@Deprecated
+	public static final String[] tokenNames;
+	static {
+		tokenNames = new String[_SYMBOLIC_NAMES.length];
+		for (int i = 0; i < tokenNames.length; i++) {
+			tokenNames[i] = VOCABULARY.getLiteralName(i);
+			if (tokenNames[i] == null) {
+				tokenNames[i] = VOCABULARY.getSymbolicName(i);
+			}
+
+			if (tokenNames[i] == null) {
+				tokenNames[i] = "<INVALID>";
+			}
+		}
+	}
 
 	@Override
-	public String[] getTokenNames() { return tokenNames; }
+	@Deprecated
+	public String[] getTokenNames() {
+		return tokenNames;
+	}
+
+	@Override
+
+	public Vocabulary getVocabulary() {
+		return VOCABULARY;
+	}
+
+	@Override
+	public String getGrammarFileName() { return "Calculator.g4"; }
 
 	@Override
 	public String[] getRuleNames() { return ruleNames; }
@@ -95,11 +127,11 @@ public class CalculatorParser extends Parser {
 	}
 	public static class AddSubContext extends ExpressionContext {
 		public Token op;
-		public ExpressionContext expression(int i) {
-			return getRuleContext(ExpressionContext.class,i);
-		}
 		public List<ExpressionContext> expression() {
 			return getRuleContexts(ExpressionContext.class);
+		}
+		public ExpressionContext expression(int i) {
+			return getRuleContext(ExpressionContext.class,i);
 		}
 		public AddSubContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
@@ -118,11 +150,11 @@ public class CalculatorParser extends Parser {
 	}
 	public static class MulDivContext extends ExpressionContext {
 		public Token op;
-		public ExpressionContext expression(int i) {
-			return getRuleContext(ExpressionContext.class,i);
-		}
 		public List<ExpressionContext> expression() {
 			return getRuleContexts(ExpressionContext.class);
+		}
+		public ExpressionContext expression(int i) {
+			return getRuleContext(ExpressionContext.class,i);
 		}
 		public MulDivContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
@@ -157,16 +189,20 @@ public class CalculatorParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(8);
+			_errHandler.sync(this);
 			switch (_input.LA(1)) {
-			case T__4:
+			case T__0:
 				{
 				_localctx = new ParensContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
 
-				setState(3); match(T__4);
-				setState(4); expression(0);
-				setState(5); match(T__3);
+				setState(3);
+				match(T__0);
+				setState(4);
+				expression(0);
+				setState(5);
+				match(T__1);
 				}
 				break;
 			case NUMBER:
@@ -174,7 +210,8 @@ public class CalculatorParser extends Parser {
 				_localctx = new NumContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(7); match(NUMBER);
+				setState(7);
+				match(NUMBER);
 				}
 				break;
 			default:
@@ -190,6 +227,7 @@ public class CalculatorParser extends Parser {
 					_prevctx = _localctx;
 					{
 					setState(16);
+					_errHandler.sync(this);
 					switch ( getInterpreter().adaptivePredict(_input,1,_ctx) ) {
 					case 1:
 						{
@@ -200,14 +238,18 @@ public class CalculatorParser extends Parser {
 						setState(11);
 						((MulDivContext)_localctx).op = _input.LT(1);
 						_la = _input.LA(1);
-						if ( !(_la==T__5 || _la==T__2) ) {
+						if ( !(_la==T__2 || _la==T__3) ) {
 							((MulDivContext)_localctx).op = (Token)_errHandler.recoverInline(this);
 						}
-						consume();
-						setState(12); expression(4);
+						else {
+							if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+							_errHandler.reportMatch(this);
+							consume();
+						}
+						setState(12);
+						expression(4);
 						}
 						break;
-
 					case 2:
 						{
 						_localctx = new AddSubContext(new ExpressionContext(_parentctx, _parentState));
@@ -217,11 +259,16 @@ public class CalculatorParser extends Parser {
 						setState(14);
 						((AddSubContext)_localctx).op = _input.LT(1);
 						_la = _input.LA(1);
-						if ( !(_la==T__1 || _la==T__0) ) {
+						if ( !(_la==T__4 || _la==T__5) ) {
 							((AddSubContext)_localctx).op = (Token)_errHandler.recoverInline(this);
 						}
-						consume();
-						setState(15); expression(3);
+						else {
+							if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+							_errHandler.reportMatch(this);
+							consume();
+						}
+						setState(15);
+						expression(3);
 						}
 						break;
 					}
@@ -246,28 +293,30 @@ public class CalculatorParser extends Parser {
 
 	public boolean sempred(RuleContext _localctx, int ruleIndex, int predIndex) {
 		switch (ruleIndex) {
-		case 0: return expression_sempred((ExpressionContext)_localctx, predIndex);
+		case 0:
+			return expression_sempred((ExpressionContext)_localctx, predIndex);
 		}
 		return true;
 	}
 	private boolean expression_sempred(ExpressionContext _localctx, int predIndex) {
 		switch (predIndex) {
-		case 0: return precpred(_ctx, 3);
-
-		case 1: return precpred(_ctx, 2);
+		case 0:
+			return precpred(_ctx, 3);
+		case 1:
+			return precpred(_ctx, 2);
 		}
 		return true;
 	}
 
 	public static final String _serializedATN =
-		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\13\30\4\2\t\2\3\2"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\13\30\4\2\t\2\3\2"+
 		"\3\2\3\2\3\2\3\2\3\2\5\2\13\n\2\3\2\3\2\3\2\3\2\3\2\3\2\7\2\23\n\2\f\2"+
-		"\16\2\26\13\2\3\2\2\3\2\3\2\2\4\4\2\3\3\6\6\3\2\7\b\31\2\n\3\2\2\2\4\5"+
-		"\b\2\1\2\5\6\7\4\2\2\6\7\5\2\2\2\7\b\7\5\2\2\b\13\3\2\2\2\t\13\7\t\2\2"+
-		"\n\4\3\2\2\2\n\t\3\2\2\2\13\24\3\2\2\2\f\r\f\5\2\2\r\16\t\2\2\2\16\23"+
-		"\5\2\2\6\17\20\f\4\2\2\20\21\t\3\2\2\21\23\5\2\2\5\22\f\3\2\2\2\22\17"+
-		"\3\2\2\2\23\26\3\2\2\2\24\22\3\2\2\2\24\25\3\2\2\2\25\3\3\2\2\2\26\24"+
-		"\3\2\2\2\5\n\22\24";
+		"\16\2\26\13\2\3\2\2\3\2\3\2\2\4\3\2\5\6\3\2\7\b\2\31\2\n\3\2\2\2\4\5\b"+
+		"\2\1\2\5\6\7\3\2\2\6\7\5\2\2\2\7\b\7\4\2\2\b\13\3\2\2\2\t\13\7\t\2\2\n"+
+		"\4\3\2\2\2\n\t\3\2\2\2\13\24\3\2\2\2\f\r\f\5\2\2\r\16\t\2\2\2\16\23\5"+
+		"\2\2\6\17\20\f\4\2\2\20\21\t\3\2\2\21\23\5\2\2\5\22\f\3\2\2\2\22\17\3"+
+		"\2\2\2\23\26\3\2\2\2\24\22\3\2\2\2\24\25\3\2\2\2\25\3\3\2\2\2\26\24\3"+
+		"\2\2\2\5\n\22\24";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {
