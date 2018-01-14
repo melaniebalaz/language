@@ -49,7 +49,7 @@ public class AdvancedCalculatorBaseVisitor<T> extends AbstractParseTreeVisitor<T
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitAddSub(@NotNull AdvancedCalculatorParser.AddSubContext ctx) { return visitChildren(ctx); }
+	@Override public T visitStart(@NotNull AdvancedCalculatorParser.StartContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -57,7 +57,7 @@ public class AdvancedCalculatorBaseVisitor<T> extends AbstractParseTreeVisitor<T
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitProgram(@NotNull AdvancedCalculatorParser.ProgramContext ctx) { return visitChildren(ctx); }
+	@Override public T visitAddSub(@NotNull AdvancedCalculatorParser.AddSubContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}

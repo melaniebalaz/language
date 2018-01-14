@@ -2,11 +2,12 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 public class AdvancedCalculatorVisitorImpl extends AdvancedCalculatorBaseVisitor<BigDecimal> {
 
-    LinkedHashMap<String, BigDecimal> variables = new LinkedHashMap<>();
+    private LinkedHashMap<String, BigDecimal> variables = new LinkedHashMap<>();
 
 
     @Override
@@ -16,6 +17,11 @@ public class AdvancedCalculatorVisitorImpl extends AdvancedCalculatorBaseVisitor
 
 
     @Override
+    /**
+     * Returns the value of a variable being used as part of an expression
+     * Variable needs to already have a value set as part of an expression
+     * @throws: Runtime Exception
+     */
     public BigDecimal visitVar(AdvancedCalculatorParser.VarContext ctx){
         String variableName = (ctx.VARIABLE().getText());
         if (!this.variables.containsKey(variableName)){
@@ -60,6 +66,12 @@ public class AdvancedCalculatorVisitorImpl extends AdvancedCalculatorBaseVisitor
         return right;
     }
 
+    @Override
+    public BigDecimal visitStart(AdvancedCalculatorParser.StartContext ctx) {
+        List<AdvancedCalculatorParser.StatementContext> statements = ctx.statement();
+        //returns the result of the last visit call
+        return statements.stream().map(this::visit).reduce((first, second) -> second).get();
+    }
 
     // TODO Implementieren sie die fehlenden Methoden (Sie brauchen einen Speicher um den aktuellen Wert der Variablen
     // TODO ablegen zu können - wählen Sie dazu eine entsprechende Datenstruktur).

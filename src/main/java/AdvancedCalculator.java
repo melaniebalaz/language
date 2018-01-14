@@ -8,8 +8,19 @@ import java.math.BigDecimal;
 
 public class AdvancedCalculator {
     public static void main(String[] args) throws IOException {
-        System.out.println(runProgram("program1.txt"));
+        System.out.println(runProgram("program1.txt")); //runs the program with an input
         System.out.println(runProgram("program2.txt"));
+    }
+
+    public BigDecimal startProgram(CharStream input){
+
+        final AdvancedCalculatorLexer lexer = new AdvancedCalculatorLexer(input);
+        final CommonTokenStream tokens = new CommonTokenStream(lexer);
+        final AdvancedCalculatorParser parser = new AdvancedCalculatorParser(tokens);
+
+        final ParseTree tree = parser.program();
+        final AdvancedCalculatorVisitor<BigDecimal> visitor = new AdvancedCalculatorVisitorImpl();
+        return visitor.visit(tree);
     }
 
     private static BigDecimal runProgram(String filename) throws IOException {

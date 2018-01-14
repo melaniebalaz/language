@@ -60,6 +60,19 @@ public interface AdvancedCalculatorListener extends ParseTreeListener {
 	void exitNum(@NotNull AdvancedCalculatorParser.NumContext ctx);
 
 	/**
+	 * Enter a parse tree produced by the {@code start}
+	 * labeled alternative in {@link AdvancedCalculatorParser#program}.
+	 * @param ctx the parse tree
+	 */
+	void enterStart(@NotNull AdvancedCalculatorParser.StartContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code start}
+	 * labeled alternative in {@link AdvancedCalculatorParser#program}.
+	 * @param ctx the parse tree
+	 */
+	void exitStart(@NotNull AdvancedCalculatorParser.StartContext ctx);
+
+	/**
 	 * Enter a parse tree produced by the {@code addSub}
 	 * labeled alternative in {@link AdvancedCalculatorParser#expression}.
 	 * @param ctx the parse tree
@@ -71,17 +84,6 @@ public interface AdvancedCalculatorListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitAddSub(@NotNull AdvancedCalculatorParser.AddSubContext ctx);
-
-	/**
-	 * Enter a parse tree produced by {@link AdvancedCalculatorParser#program}.
-	 * @param ctx the parse tree
-	 */
-	void enterProgram(@NotNull AdvancedCalculatorParser.ProgramContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link AdvancedCalculatorParser#program}.
-	 * @param ctx the parse tree
-	 */
-	void exitProgram(@NotNull AdvancedCalculatorParser.ProgramContext ctx);
 
 	/**
 	 * Enter a parse tree produced by the {@code operation}

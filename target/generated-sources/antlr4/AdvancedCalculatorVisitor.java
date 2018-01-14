@@ -43,19 +43,20 @@ public interface AdvancedCalculatorVisitor<T> extends ParseTreeVisitor<T> {
 	T visitNum(@NotNull AdvancedCalculatorParser.NumContext ctx);
 
 	/**
+	 * Visit a parse tree produced by the {@code start}
+	 * labeled alternative in {@link AdvancedCalculatorParser#program}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStart(@NotNull AdvancedCalculatorParser.StartContext ctx);
+
+	/**
 	 * Visit a parse tree produced by the {@code addSub}
 	 * labeled alternative in {@link AdvancedCalculatorParser#expression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitAddSub(@NotNull AdvancedCalculatorParser.AddSubContext ctx);
-
-	/**
-	 * Visit a parse tree produced by {@link AdvancedCalculatorParser#program}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitProgram(@NotNull AdvancedCalculatorParser.ProgramContext ctx);
 
 	/**
 	 * Visit a parse tree produced by the {@code operation}
