@@ -29,7 +29,7 @@ public class AdvancedCalculatorTest {
         AdvancedCalculator calculator = new AdvancedCalculator();
 
         String input = "1 + 1"+"\n";
-        assertEquals(calculator.startProgram(convertToCharStream(input)), new BigDecimal(2));
+        assertEquals(0, calculator.startProgram(convertToCharStream(input)).compareTo(new BigDecimal(2)));
 
     }
 
@@ -38,7 +38,64 @@ public class AdvancedCalculatorTest {
         AdvancedCalculator calculator = new AdvancedCalculator();
 
         String input = "8 / 4"+"\n";
-        assertEquals(calculator.startProgram(convertToCharStream(input)), new BigDecimal(2));
+        assertEquals(0, calculator.startProgram(convertToCharStream(input)).compareTo(new BigDecimal(2)));
 
     }
+
+    @Test
+    public void testSimpleAssignment(){
+        AdvancedCalculator calculator = new AdvancedCalculator();
+
+        String input = "test = 4"+"\n";
+        assertEquals(0, calculator.startProgram(convertToCharStream(input)).compareTo(new BigDecimal(4)));
+
+    }
+
+    @Test
+    public void testExpressionAssignment(){
+        AdvancedCalculator calculator = new AdvancedCalculator();
+
+        String input = "test = 4 + 5"+"\n";
+        assertEquals(0, calculator.startProgram(convertToCharStream(input)).compareTo(new BigDecimal(9)));
+
+    }
+
+    @Test
+    public void testTwoLiner(){
+        AdvancedCalculator calculator = new AdvancedCalculator();
+
+        String input = "test = 4 + 5"+"\n" +
+                "test + 1" +"\n";
+        assertEquals(0, calculator.startProgram(convertToCharStream(input)).compareTo(new BigDecimal(10)));
+
+    }
+
+    @Test
+    public void testSeveralLiner() {
+        AdvancedCalculator calculator = new AdvancedCalculator();
+
+        String input = "t = 100" + "\n" +
+                "s = 200" + "\n" +
+                "u = 300" + "\n" +
+                "v = 400" + "\n" +
+                "t + s" + "\n";
+
+        assertEquals(0, calculator.startProgram(convertToCharStream(input)).compareTo(new BigDecimal(300)));
+    }
+
+    @Test
+    public void testSeveralLiner2() {
+        AdvancedCalculator calculator = new AdvancedCalculator();
+
+        String input = "t = 100" + "\n" +
+                "s = 200" + "\n" +
+                "u = 300" + "\n" +
+                "v = 400" + "\n" +
+                "t + s / u * v" + "\n";
+
+        assertEquals(0, calculator.startProgram(convertToCharStream(input)).compareTo(new BigDecimal(366.6666666667)));
+    }
+
+
+
 }

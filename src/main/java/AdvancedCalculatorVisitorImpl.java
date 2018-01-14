@@ -25,7 +25,7 @@ public class AdvancedCalculatorVisitorImpl extends AdvancedCalculatorBaseVisitor
     public BigDecimal visitVar(AdvancedCalculatorParser.VarContext ctx){
         String variableName = (ctx.VARIABLE().getText());
         if (!this.variables.containsKey(variableName)){
-            throw new RuntimeException("The variable " + variableName + " is not set!");
+            return new BigDecimal(0);
         }
         return this.variables.get(variableName);
     }
