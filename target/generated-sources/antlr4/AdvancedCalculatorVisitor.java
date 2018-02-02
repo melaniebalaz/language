@@ -31,12 +31,26 @@ public interface AdvancedCalculatorVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitAssignment(AdvancedCalculatorParser.AssignmentContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code print}
+	 * labeled alternative in {@link AdvancedCalculatorParser#statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPrint(AdvancedCalculatorParser.PrintContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code parens}
 	 * labeled alternative in {@link AdvancedCalculatorParser#expression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitParens(AdvancedCalculatorParser.ParensContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code string}
+	 * labeled alternative in {@link AdvancedCalculatorParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitString(AdvancedCalculatorParser.StringContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code var}
 	 * labeled alternative in {@link AdvancedCalculatorParser#expression}.

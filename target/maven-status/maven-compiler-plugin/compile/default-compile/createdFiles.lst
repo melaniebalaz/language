@@ -1,4 +1,3 @@
-CalculatorLexer.class
 AdvancedCalculatorVisitor.class
 CalculatorParser$ExpressionContext.class
 CalculatorParser$MulDivContext.class
@@ -7,8 +6,8 @@ AdvancedCalculatorListener.class
 AdvancedCalculatorParser$ExpressionContext.class
 CalculatorParser$NumContext.class
 AdvancedCalculatorParser$AddSubContext.class
+AdvancedCalculatorParser$PrintContext.class
 CalculatorParser$AddSubContext.class
-AdvancedCalculatorVisitorImpl.class
 AdvancedCalculatorParser$MulDivContext.class
 CalculatorBaseListener.class
 AdvancedCalculatorParser.class
@@ -17,7 +16,6 @@ CalculatorVisitor.class
 CalculatorParser.class
 AdvancedCalculatorParser$VarContext.class
 AdvancedCalculatorParser$NumContext.class
-AdvancedCalculatorBaseListener.class
 AdvancedCalculatorParser$StatementContext.class
 AdvancedCalculatorParser$ParensContext.class
 Calculator.class

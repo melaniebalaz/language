@@ -51,6 +51,18 @@ public class AdvancedCalculatorBaseListener implements AdvancedCalculatorListene
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterPrint(AdvancedCalculatorParser.PrintContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPrint(AdvancedCalculatorParser.PrintContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterParens(AdvancedCalculatorParser.ParensContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -58,6 +70,18 @@ public class AdvancedCalculatorBaseListener implements AdvancedCalculatorListene
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitParens(AdvancedCalculatorParser.ParensContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterString(AdvancedCalculatorParser.StringContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitString(AdvancedCalculatorParser.StringContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

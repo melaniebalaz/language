@@ -1,3 +1,5 @@
+import java.io.IOException;
+import java.io.OutputStream;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.HashMap;
@@ -5,9 +7,15 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public class AdvancedCalculatorVisitorImpl extends AdvancedCalculatorBaseVisitor<BigDecimal> {
+public class AdvancedCalculatorVisitorImpl extends AdvancedCalculatorBaseVisitor<Object> {
 
-    private LinkedHashMap<String, BigDecimal> variables = new LinkedHashMap<>();
+    private final OutputStream stream;
+    private LinkedHashMap<String, Object> variables = new LinkedHashMap<>();
+
+    public AdvancedCalculatorVisitorImpl(OutputStream stream) {
+
+        this.stream = stream;
+    }
 
 
     @Override
@@ -15,6 +23,10 @@ public class AdvancedCalculatorVisitorImpl extends AdvancedCalculatorBaseVisitor
         return new BigDecimal(ctx.NUMBER().getText());
     }
 
+    @Override
+    public String visitString(AdvancedCalculatorParser.StringContext ctx) {
+        return (ctx.STRING().toString().replaceAll("\"",""));
+    }
 
     @Override
     /**
@@ -22,59 +34,76 @@ public class AdvancedCalculatorVisitorImpl extends AdvancedCalculatorBaseVisitor
      * Variable needs to already have a value set as part of an expression
      * @throws: Runtime Exception
      */
-    public BigDecimal visitVar(AdvancedCalculatorParser.VarContext ctx){
+    public Object visitVar(AdvancedCalculatorParser.VarContext ctx){
         String variableName = (ctx.VARIABLE().getText());
         if (!this.variables.containsKey(variableName)){
-            return new BigDecimal(0);
+            throw new RuntimeException("Variable not set");
         }
         return this.variables.get(variableName);
     }
 
     @Override
-    public BigDecimal visitParens(AdvancedCalculatorParser.ParensContext ctx) {
+    public Object visitParens(AdvancedCalculatorParser.ParensContext ctx) {
         return visit(ctx.expression());
     }
 
     @Override
     public BigDecimal visitMulDiv(AdvancedCalculatorParser.MulDivContext ctx) {
-        final BigDecimal left = visit(ctx.expression(0));
-        final BigDecimal right = visit(ctx.expression(1));
-        if (ctx.op.getText().equals("*")) {
-            return left.multiply(right);
-        } else {
-            return left.divide(right, 9, RoundingMode.HALF_UP);
+        final Object left = visit(ctx.expression(0));
+        final Object right = visit(ctx.expression(1));
+        if (left instanceof BigDecimal && right instanceof BigDecimal){
+            if (ctx.op.getText().equals("*")) {
+                return ((BigDecimal)left).multiply((BigDecimal)right);
+            } else {
+                return ((BigDecimal)left).divide((BigDecimal)right, 9, RoundingMode.HALF_UP);
+            }
         }
+        else throw new RuntimeException("Cannot perform this operation on these datatypes");
+
+
     }
 
     @Override
     public BigDecimal visitAddSub(AdvancedCalculatorParser.AddSubContext ctx) {
-        final BigDecimal left = visit(ctx.expression(0));
-        final BigDecimal right = visit(ctx.expression(1));
-        if (ctx.op.getText().equals("+")) {
-            return left.add(right);
-        } else {
-            return left.subtract(right);
+        final Object left = visit(ctx.expression(0));
+        final Object right = visit(ctx.expression(1));
+        if (left instanceof BigDecimal && right instanceof BigDecimal){
+            if (ctx.op.getText().equals("+")) {
+                return ((BigDecimal)left).add((BigDecimal)right);
+            } else {
+                return ((BigDecimal)left).subtract((BigDecimal)right);
+            }
         }
+        else throw new RuntimeException("Cannot perform this operation on these datatypes");
     }
 
 
     @Override
-    public BigDecimal visitAssignment(AdvancedCalculatorParser.AssignmentContext ctx) {
+    public Object visitAssignment(AdvancedCalculatorParser.AssignmentContext ctx) {
         final String variableName = (ctx.VARIABLE().getText());
-        final BigDecimal right = visit(ctx.expression());
+        final Object right = visit(ctx.expression());
         this.variables.put(variableName,right);
         return right;
     }
 
     @Override
-    public BigDecimal visitStart(AdvancedCalculatorParser.StartContext ctx) {
+    public Object visitStart(AdvancedCalculatorParser.StartContext ctx) {
         List<AdvancedCalculatorParser.StatementContext> statements = ctx.statement();
         //returns the result of the last visit call
         return statements.stream().map(this::visit).reduce((first, second) -> second).get();
     }
 
-    // TODO Implementieren sie die fehlenden Methoden (Sie brauchen einen Speicher um den aktuellen Wert der Variablen
-    // TODO ablegen zu können - wählen Sie dazu eine entsprechende Datenstruktur).
+    @Override
+    public Object visitPrint(AdvancedCalculatorParser.PrintContext ctx) {
+        String value = visit(ctx.expression()).toString();
+        try {
+            stream.write(value.getBytes());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return value;
+    }
+
 
 
 }

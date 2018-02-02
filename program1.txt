@@ -1,5 +1,2 @@
-t = 100
-s = 200
-u = 300
-v = 400
-t + s / u * v
+var = "te st variable"
+out: var
