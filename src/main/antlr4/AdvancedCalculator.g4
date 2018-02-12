@@ -11,7 +11,6 @@ statement   : VARIABLE '=' ( expression | STRING | function)   # assignment
 
 function    : 'out'':' ( expression | STRING)                         # print
             | 'foreach ' VARIABLE 'in ' expression ' do ' expression   # foreach
-            | VARIABLE':'
             ;
 
 //'do' expression on datacontainer
