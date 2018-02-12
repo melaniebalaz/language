@@ -8,10 +8,15 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 
 import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.assertArrayEquals;
 
 public class AdvancedCalculatorTest {
 
@@ -117,10 +122,49 @@ public class AdvancedCalculatorTest {
 
 
         String input = "var = \"test variable\" " + "\n" +
-                "out : var" + "\n";
+                "out: var" + "\n";
         calculator.startProgram(convertToCharStream(input),stream);
         assertEquals("test variable",new String(stream.toByteArray()));
     }
+
+
+    @Test
+    public void testForeachWithSingleItemList() {
+        AdvancedCalculator calculator = new AdvancedCalculator();
+
+
+        String input = "var = 5" + "\n" +
+                "foreach x in var do x+1" + "\n";
+        assertEquals(new BigDecimal(6),((BigDecimal)calculator.startProgram(convertToCharStream(input),null)));
+    }
+
+    @Test
+    public void testList() {
+        AdvancedCalculator calculator = new AdvancedCalculator();
+
+
+        String input = "var = list(1,2,3)" + "\n" +
+                "var" + "\n";
+        ArrayList<BigDecimal> list = new ArrayList<>();
+        list.add(new BigDecimal(1));
+        list.add(new BigDecimal(2));
+        list.add(new BigDecimal(3));
+        assertTrue(list.equals(calculator.startProgram(convertToCharStream(input),null)));
+    }
+
+
+    @Test
+    public void testForeachWithMultipleItemList() {
+        AdvancedCalculator calculator = new AdvancedCalculator();
+        String input = "var = list(1,2,3)" + "\n" +
+                "foreach x in var do x+1" + "\n";
+        ArrayList<BigDecimal> list = new ArrayList<>();
+        list.add(new BigDecimal(2));
+        list.add(new BigDecimal(3));
+        list.add(new BigDecimal(4));
+        assertTrue(list.equals(calculator.startProgram(convertToCharStream(input),null)));
+    }
+
 
 
 

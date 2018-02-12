@@ -3,20 +3,30 @@ grammar AdvancedCalculator;
 program     : (statement NEWLINE)+                  #start
             ;
 
-statement   : expression                            # operation
-            | VARIABLE '=' ( expression | STRING)   # assignment
-            | 'out' ':' ( expression | STRING)      # print
+statement   : VARIABLE '=' ( expression | STRING | function)   # assignment
+            | function                                         # func
+            | expression                                       # express
             ;
 
 
+function    : 'out'':' ( expression | STRING)                         # print
+            | 'foreach ' VARIABLE 'in ' expression ' do ' expression   # foreach
+            | VARIABLE':'
+            ;
+
+//'do' expression on datacontainer
 
 expression  : '(' expression ')'                    # parens
             | expression op=('*' | '/') expression  # mulDiv
             | expression op=('+' | '-') expression  # addSub
-            | NUMBER                                # num //expression can be a number
-            | VARIABLE                              # var //Expression can be a variable
-            | STRING                                # string
+            | datacontainer                              # data
             ;
+
+datacontainer    : NUMBER                                          # num
+                 | VARIABLE                                        # var
+                 | STRING                                          # string
+                 | 'list('(datacontainer(','datacontainer)*)')'    # list
+                 ;
 
 
 NUMBER      :   DIGIT* '.' DIGIT+

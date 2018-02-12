@@ -2,15 +2,13 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class AdvancedCalculatorVisitorImpl extends AdvancedCalculatorBaseVisitor<Object> {
 
     private final OutputStream stream;
     private LinkedHashMap<String, Object> variables = new LinkedHashMap<>();
+    private Stack<LinkedHashMap<String,Object>> stack = new Stack<>();
 
     public AdvancedCalculatorVisitorImpl(OutputStream stream) {
 
@@ -26,6 +24,15 @@ public class AdvancedCalculatorVisitorImpl extends AdvancedCalculatorBaseVisitor
     @Override
     public String visitString(AdvancedCalculatorParser.StringContext ctx) {
         return (ctx.STRING().toString().replaceAll("\"",""));
+    }
+
+    @Override
+    public ArrayList visitList(AdvancedCalculatorParser.ListContext ctx){
+        ArrayList<Object> list = new ArrayList<>();
+        for (AdvancedCalculatorParser.DatacontainerContext data : ctx.datacontainer()) {
+            list.add(visit(data));
+        }
+        return list;
     }
 
     @Override
@@ -102,6 +109,43 @@ public class AdvancedCalculatorVisitorImpl extends AdvancedCalculatorBaseVisitor
             throw new RuntimeException(e);
         }
         return value;
+    }
+
+
+    /**
+     *
+     * @param ctx
+     * @return
+     * 'foreach ' VARIABLE 'in ' expression ' do ' expressio
+     */
+    public Object visitForeach(AdvancedCalculatorParser.ForeachContext ctx){
+        Object value = visit(ctx.expression(0));
+        boolean valueMoreThanOneItem = true;
+
+        //if value is not a list, make a singleton list out of it
+        if (!(value instanceof ArrayList)){
+            value = Collections.singletonList(value);
+            valueMoreThanOneItem = false;
+        }
+
+
+        stack.push(new LinkedHashMap<>(variables));
+
+        List<Object> result = new ArrayList<>();
+        for (Object item : ((List)value)){
+            this.variables.put(ctx.VARIABLE().getText(), item);
+            result.add(visit(ctx.expression(1)));
+        }
+        //'foreach ' VARIABLE 'in ' expression ' do ' expression
+
+        variables = stack.pop();
+        if (valueMoreThanOneItem){
+            return result;
+        }
+        else {
+            return result.get(0);
+        }
+
     }
 
 
