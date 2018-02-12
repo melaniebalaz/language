@@ -9,8 +9,9 @@ statement   : VARIABLE '=' ( expression | STRING | function)   # assignment
             ;
 
 
-function    : 'out'':' ( expression | STRING)                         # print
-            | 'foreach ' VARIABLE 'in ' expression ' do ' expression   # foreach
+function    : 'out'':' ( expression | STRING)                                    # print
+            | 'foreach ' VARIABLE 'in ' expression ' do ' expression             # foreach
+            | VARIABLE':' NEWLINE (statement)+                                   # declaration
             ;
 
 //'do' expression on datacontainer

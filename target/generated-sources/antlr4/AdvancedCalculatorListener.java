@@ -79,6 +79,18 @@ public interface AdvancedCalculatorListener extends ParseTreeListener {
 	 */
 	void exitForeach(AdvancedCalculatorParser.ForeachContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code declaration}
+	 * labeled alternative in {@link AdvancedCalculatorParser#function}.
+	 * @param ctx the parse tree
+	 */
+	void enterDeclaration(AdvancedCalculatorParser.DeclarationContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code declaration}
+	 * labeled alternative in {@link AdvancedCalculatorParser#function}.
+	 * @param ctx the parse tree
+	 */
+	void exitDeclaration(AdvancedCalculatorParser.DeclarationContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code parens}
 	 * labeled alternative in {@link AdvancedCalculatorParser#expression}.
 	 * @param ctx the parse tree

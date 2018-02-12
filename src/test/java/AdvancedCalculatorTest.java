@@ -129,16 +129,6 @@ public class AdvancedCalculatorTest {
 
 
     @Test
-    public void testForeachWithSingleItemList() {
-        AdvancedCalculator calculator = new AdvancedCalculator();
-
-
-        String input = "var = 5" + "\n" +
-                "foreach x in var do x+1" + "\n";
-        assertEquals(new BigDecimal(6),((BigDecimal)calculator.startProgram(convertToCharStream(input),null)));
-    }
-
-    @Test
     public void testList() {
         AdvancedCalculator calculator = new AdvancedCalculator();
 

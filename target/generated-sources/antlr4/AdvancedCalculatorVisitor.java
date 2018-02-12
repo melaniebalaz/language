@@ -52,6 +52,13 @@ public interface AdvancedCalculatorVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitForeach(AdvancedCalculatorParser.ForeachContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code declaration}
+	 * labeled alternative in {@link AdvancedCalculatorParser#function}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDeclaration(AdvancedCalculatorParser.DeclarationContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code parens}
 	 * labeled alternative in {@link AdvancedCalculatorParser#expression}.
 	 * @param ctx the parse tree

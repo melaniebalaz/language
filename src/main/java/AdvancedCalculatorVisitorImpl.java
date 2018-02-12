@@ -120,12 +120,10 @@ public class AdvancedCalculatorVisitorImpl extends AdvancedCalculatorBaseVisitor
      */
     public Object visitForeach(AdvancedCalculatorParser.ForeachContext ctx){
         Object value = visit(ctx.expression(0));
-        boolean valueMoreThanOneItem = true;
 
         //if value is not a list, make a singleton list out of it
-        if (!(value instanceof ArrayList)){
-            value = Collections.singletonList(value);
-            valueMoreThanOneItem = false;
+        if (!(value instanceof List)){
+           throw new RuntimeException("Foreach can only be applied to a list");
         }
 
 
@@ -136,15 +134,14 @@ public class AdvancedCalculatorVisitorImpl extends AdvancedCalculatorBaseVisitor
             this.variables.put(ctx.VARIABLE().getText(), item);
             result.add(visit(ctx.expression(1)));
         }
-        //'foreach ' VARIABLE 'in ' expression ' do ' expression
 
         variables = stack.pop();
-        if (valueMoreThanOneItem){
-            return result;
-        }
-        else {
-            return result.get(0);
-        }
+
+        return result;
+
+    }
+
+    public Object visitDeclaration(AdvancedCalculatorParser.DeclarationContext ctx){
 
     }
 

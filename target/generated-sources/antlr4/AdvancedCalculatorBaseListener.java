@@ -87,6 +87,18 @@ public class AdvancedCalculatorBaseListener implements AdvancedCalculatorListene
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterDeclaration(AdvancedCalculatorParser.DeclarationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDeclaration(AdvancedCalculatorParser.DeclarationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterParens(AdvancedCalculatorParser.ParensContext ctx) { }
 	/**
 	 * {@inheritDoc}
