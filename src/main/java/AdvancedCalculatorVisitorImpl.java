@@ -1,3 +1,6 @@
+import org.antlr.v4.runtime.tree.TerminalNode;
+
+import java.beans.Expression;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.math.BigDecimal;
@@ -11,10 +14,10 @@ public class AdvancedCalculatorVisitorImpl extends AdvancedCalculatorBaseVisitor
     private Stack<LinkedHashMap<String,Object>> stack = new Stack<>();
 
     private class Function {
-        private List<AdvancedCalculatorParser.ExpressionContext> parameters;
+        private List<TerminalNode> parameters;
         private List<AdvancedCalculatorParser.StatementContext> statements;
 
-        private Function(List<AdvancedCalculatorParser.ExpressionContext> parameters, List<AdvancedCalculatorParser.StatementContext> statements) {
+        private Function(List<TerminalNode> parameters, List<AdvancedCalculatorParser.StatementContext> statements) {
             this.parameters = parameters;
             this.statements = statements;
         }
@@ -152,10 +155,32 @@ public class AdvancedCalculatorVisitorImpl extends AdvancedCalculatorBaseVisitor
     }
 
     public Object visitDeclaration(AdvancedCalculatorParser.DeclarationContext ctx){
-        List<AdvancedCalculatorParser.ExpressionContext> parameters = ctx.expression();
+        List<TerminalNode> parameters = ctx.VARIABLE();
         List<AdvancedCalculatorParser.StatementContext> statements = ctx.statement();
 
         return new Function(parameters,statements);
+    }
+
+    public Object visitFunctionCall(AdvancedCalculatorParser.FunctionCallContext ctx){
+        Function function = (Function)variables.get(ctx.VARIABLE().getText());
+        List<AdvancedCalculatorParser.ExpressionContext> param = ctx.expression();
+        //Expressions as parameters
+
+        stack.push(new LinkedHashMap<>(variables));
+
+        if (function.parameters.size() != param.size()){
+            throw new RuntimeException("Missing parameters!");
+        }
+
+        for (int i = 0; i <= param.size(); i++){
+            variables.put(function.parameters.get(i).getText(),param.get(i));
+        }
+
+
+        Object result = function.statements.stream().map(this::visit).reduce((first, second) -> second).get();
+
+        variables = stack.pop();
+        return result;
     }
 
 

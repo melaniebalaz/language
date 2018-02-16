@@ -8,7 +8,7 @@ statement   : VARIABLE '=' ( expression | STRING | function)   # assignment
             ;
 
 
-function    :'('(expression (','expression)*)* ')'':' NEWLINE (statement)+      # declaration
+function    :'('(VARIABLE (','VARIABLE)*)* ')'':' NEWLINE (statement)+      # declaration
             ;
 
 languageconstruct : 'out'':' ( expression | STRING)                            # print
@@ -21,7 +21,7 @@ expression  : '(' expression ')'                    # parens
             | expression op=('*' | '/') expression  # mulDiv
             | expression op=('+' | '-') expression  # addSub
             | datacontainer                              # data
-            | VARIABLE'('(expression (','expression)*)*')' #functioncall
+            | VARIABLE'('(expression (','expression)*)*')' #functionCall
             ;
 
 datacontainer    : NUMBER                                          # num

@@ -31,20 +31,6 @@ public interface AdvancedCalculatorVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitExpress(AdvancedCalculatorParser.ExpressContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code print}
-	 * labeled alternative in {@link AdvancedCalculatorParser#function}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitPrint(AdvancedCalculatorParser.PrintContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code foreach}
-	 * labeled alternative in {@link AdvancedCalculatorParser#function}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitForeach(AdvancedCalculatorParser.ForeachContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code declaration}
 	 * labeled alternative in {@link AdvancedCalculatorParser#function}.
 	 * @param ctx the parse tree
@@ -52,12 +38,19 @@ public interface AdvancedCalculatorVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitDeclaration(AdvancedCalculatorParser.DeclarationContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code call}
-	 * labeled alternative in {@link AdvancedCalculatorParser#expression}.
+	 * Visit a parse tree produced by the {@code print}
+	 * labeled alternative in {@link AdvancedCalculatorParser#languageconstruct}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitCall(AdvancedCalculatorParser.CallContext ctx);
+	T visitPrint(AdvancedCalculatorParser.PrintContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code foreach}
+	 * labeled alternative in {@link AdvancedCalculatorParser#languageconstruct}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitForeach(AdvancedCalculatorParser.ForeachContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code parens}
 	 * labeled alternative in {@link AdvancedCalculatorParser#expression}.
@@ -72,6 +65,13 @@ public interface AdvancedCalculatorVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitData(AdvancedCalculatorParser.DataContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code functionCall}
+	 * labeled alternative in {@link AdvancedCalculatorParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunctionCall(AdvancedCalculatorParser.FunctionCallContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code addSub}
 	 * labeled alternative in {@link AdvancedCalculatorParser#expression}.
