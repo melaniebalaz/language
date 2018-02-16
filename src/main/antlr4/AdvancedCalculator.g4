@@ -4,15 +4,16 @@ program     : (statement NEWLINE)+                  #start
             ;
 
 statement   : VARIABLE '=' ( expression | STRING | function)   # assignment
-            | function                                         # func
             | expression                                       # express
             ;
 
 
-function    : 'out'':' ( expression | STRING)                                    # print
-            | 'foreach ' VARIABLE 'in ' expression ' do ' expression             # foreach
-            | VARIABLE':' NEWLINE (statement)+                                   # declaration
+function    :'('(expression (','expression)*)* ')'':' NEWLINE (statement)+      # declaration
             ;
+
+languageconstruct : 'out'':' ( expression | STRING)                            # print
+                  | 'foreach ' VARIABLE 'in ' expression ' do ' expression     # foreach
+                  ;
 
 //'do' expression on datacontainer
 
@@ -20,6 +21,7 @@ expression  : '(' expression ')'                    # parens
             | expression op=('*' | '/') expression  # mulDiv
             | expression op=('+' | '-') expression  # addSub
             | datacontainer                              # data
+            | VARIABLE'('(expression (','expression)*)*')' #functioncall
             ;
 
 datacontainer    : NUMBER                                          # num

@@ -10,6 +10,16 @@ public class AdvancedCalculatorVisitorImpl extends AdvancedCalculatorBaseVisitor
     private LinkedHashMap<String, Object> variables = new LinkedHashMap<>();
     private Stack<LinkedHashMap<String,Object>> stack = new Stack<>();
 
+    private class Function {
+        private List<AdvancedCalculatorParser.ExpressionContext> parameters;
+        private List<AdvancedCalculatorParser.StatementContext> statements;
+
+        private Function(List<AdvancedCalculatorParser.ExpressionContext> parameters, List<AdvancedCalculatorParser.StatementContext> statements) {
+            this.parameters = parameters;
+            this.statements = statements;
+        }
+    }
+
     public AdvancedCalculatorVisitorImpl(OutputStream stream) {
 
         this.stream = stream;
@@ -142,7 +152,10 @@ public class AdvancedCalculatorVisitorImpl extends AdvancedCalculatorBaseVisitor
     }
 
     public Object visitDeclaration(AdvancedCalculatorParser.DeclarationContext ctx){
+        List<AdvancedCalculatorParser.ExpressionContext> parameters = ctx.expression();
+        List<AdvancedCalculatorParser.StatementContext> statements = ctx.statement();
 
+        return new Function(parameters,statements);
     }
 
 

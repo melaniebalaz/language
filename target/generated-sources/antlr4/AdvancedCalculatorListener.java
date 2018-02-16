@@ -31,18 +31,6 @@ public interface AdvancedCalculatorListener extends ParseTreeListener {
 	 */
 	void exitAssignment(AdvancedCalculatorParser.AssignmentContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code func}
-	 * labeled alternative in {@link AdvancedCalculatorParser#statement}.
-	 * @param ctx the parse tree
-	 */
-	void enterFunc(AdvancedCalculatorParser.FuncContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code func}
-	 * labeled alternative in {@link AdvancedCalculatorParser#statement}.
-	 * @param ctx the parse tree
-	 */
-	void exitFunc(AdvancedCalculatorParser.FuncContext ctx);
-	/**
 	 * Enter a parse tree produced by the {@code express}
 	 * labeled alternative in {@link AdvancedCalculatorParser#statement}.
 	 * @param ctx the parse tree
@@ -90,6 +78,18 @@ public interface AdvancedCalculatorListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitDeclaration(AdvancedCalculatorParser.DeclarationContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code call}
+	 * labeled alternative in {@link AdvancedCalculatorParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterCall(AdvancedCalculatorParser.CallContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code call}
+	 * labeled alternative in {@link AdvancedCalculatorParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitCall(AdvancedCalculatorParser.CallContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code parens}
 	 * labeled alternative in {@link AdvancedCalculatorParser#expression}.
