@@ -3,12 +3,13 @@ grammar AdvancedCalculator;
 program     : (statement NEWLINE)+                  #start
             ;
 
-statement   : VARIABLE '=' ( expression | STRING | function)   # assignment
+statement   : VARIABLE '=' expression                          # assignment
             | expression                                       # express
+            | languageconstruct                                # standardmethods
             ;
 
 
-function    :'('(VARIABLE (','VARIABLE)*)* ')'':' NEWLINE (statement)+      # declaration
+function    :'('(VARIABLE (','VARIABLE)*)* ')'':' NEWLINE (statement)+'.'      # declaration
             ;
 
 languageconstruct : 'out'':' ( expression | STRING)                            # print
@@ -21,6 +22,7 @@ expression  : '(' expression ')'                    # parens
             | expression op=('*' | '/') expression  # mulDiv
             | expression op=('+' | '-') expression  # addSub
             | datacontainer                              # data
+            | function                                   # func
             | VARIABLE'('(expression (','expression)*)*')' #functionCall
             ;
 

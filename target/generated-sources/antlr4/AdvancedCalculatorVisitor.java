@@ -31,6 +31,13 @@ public interface AdvancedCalculatorVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitExpress(AdvancedCalculatorParser.ExpressContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code standardmethods}
+	 * labeled alternative in {@link AdvancedCalculatorParser#statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStandardmethods(AdvancedCalculatorParser.StandardmethodsContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code declaration}
 	 * labeled alternative in {@link AdvancedCalculatorParser#function}.
 	 * @param ctx the parse tree
@@ -65,6 +72,13 @@ public interface AdvancedCalculatorVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitData(AdvancedCalculatorParser.DataContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code func}
+	 * labeled alternative in {@link AdvancedCalculatorParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunc(AdvancedCalculatorParser.FuncContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code functionCall}
 	 * labeled alternative in {@link AdvancedCalculatorParser#expression}.

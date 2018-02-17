@@ -1,6 +1,7 @@
 import org.antlr.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
+import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -16,6 +17,7 @@ import java.util.List;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;
+import static junit.framework.TestCase.fail;
 import static org.junit.Assert.assertArrayEquals;
 
 public class AdvancedCalculatorTest {
@@ -153,6 +155,25 @@ public class AdvancedCalculatorTest {
         list.add(new BigDecimal(3));
         list.add(new BigDecimal(4));
         assertTrue(list.equals(calculator.startProgram(convertToCharStream(input),null)));
+    }
+
+    @Test
+    public void testFunctionCall() {
+        AdvancedCalculator calculator = new AdvancedCalculator();
+        String input = "add = (a,b):" + "\n" +
+                "a+b." + "\n" +
+                "add(1,2)" + "\n";
+        assertEquals(new BigDecimal(3), calculator.startProgram(convertToCharStream(input),null));
+    }
+
+    @Test
+    public void testFunctionCallWithoutDeclaration() {
+        AdvancedCalculator calculator = new AdvancedCalculator();
+        String input = "add(1,2)" + "\n";
+        try {
+            calculator.startProgram(convertToCharStream(input),null);
+            Assert.fail();
+        } catch (Exception e) {}
     }
 
 

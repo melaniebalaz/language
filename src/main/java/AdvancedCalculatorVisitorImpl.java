@@ -94,7 +94,7 @@ public class AdvancedCalculatorVisitorImpl extends AdvancedCalculatorBaseVisitor
                 return ((BigDecimal)left).subtract((BigDecimal)right);
             }
         }
-        else throw new RuntimeException("Cannot perform this operation on these datatypes");
+        else throw new RuntimeException("Cannot perform this operation on these datatypes: " +  left.getClass().getName() );
     }
 
 
@@ -162,7 +162,14 @@ public class AdvancedCalculatorVisitorImpl extends AdvancedCalculatorBaseVisitor
     }
 
     public Object visitFunctionCall(AdvancedCalculatorParser.FunctionCallContext ctx){
-        Function function = (Function)variables.get(ctx.VARIABLE().getText());
+        Function function;
+        function = (Function)variables.get(ctx.VARIABLE().getText());
+        //Need to  catch a potential error if function has not been declared
+        if (function == null){
+            throw new RuntimeException("This function has not been declared and cannot be called");
+        }
+
+
         List<AdvancedCalculatorParser.ExpressionContext> param = ctx.expression();
         //Expressions as parameters
 
@@ -172,8 +179,8 @@ public class AdvancedCalculatorVisitorImpl extends AdvancedCalculatorBaseVisitor
             throw new RuntimeException("Missing parameters!");
         }
 
-        for (int i = 0; i <= param.size(); i++){
-            variables.put(function.parameters.get(i).getText(),param.get(i));
+        for (int i = 0; i < param.size(); i++){
+            variables.put(function.parameters.get(i).getText(),visit(param.get(i)));
         }
 
 
