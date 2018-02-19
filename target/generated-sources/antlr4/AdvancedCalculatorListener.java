@@ -91,6 +91,18 @@ public interface AdvancedCalculatorListener extends ParseTreeListener {
 	 */
 	void exitForeach(AdvancedCalculatorParser.ForeachContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code reverse}
+	 * labeled alternative in {@link AdvancedCalculatorParser#languageconstruct}.
+	 * @param ctx the parse tree
+	 */
+	void enterReverse(AdvancedCalculatorParser.ReverseContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code reverse}
+	 * labeled alternative in {@link AdvancedCalculatorParser#languageconstruct}.
+	 * @param ctx the parse tree
+	 */
+	void exitReverse(AdvancedCalculatorParser.ReverseContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code parens}
 	 * labeled alternative in {@link AdvancedCalculatorParser#expression}.
 	 * @param ctx the parse tree

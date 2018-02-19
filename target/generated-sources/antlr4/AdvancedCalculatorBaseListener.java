@@ -99,6 +99,18 @@ public class AdvancedCalculatorBaseListener implements AdvancedCalculatorListene
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterReverse(AdvancedCalculatorParser.ReverseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitReverse(AdvancedCalculatorParser.ReverseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterParens(AdvancedCalculatorParser.ParensContext ctx) { }
 	/**
 	 * {@inheritDoc}

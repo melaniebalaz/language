@@ -176,7 +176,31 @@ public class AdvancedCalculatorTest {
         } catch (Exception e) {}
     }
 
+    @Test
+    public void testStringReverse() {
+        AdvancedCalculator calculator = new AdvancedCalculator();
+        String input = "reverse: \"test variable\"" + "\n";
+        assertEquals("elbairav tset",calculator.startProgram(convertToCharStream(input),null));
+    }
 
+    @Test
+    public void testNumberReverse() {
+        AdvancedCalculator calculator = new AdvancedCalculator();
+        String input = "reverse: 35" + "\n";
+        assertEquals("53",calculator.startProgram(convertToCharStream(input),null));
+    }
+
+    @Test
+    public void testListReverse() {
+        AdvancedCalculator calculator = new AdvancedCalculator();
+
+        String input = "reverse: list(1,2,3)" + "\n";
+        ArrayList<BigDecimal> list = new ArrayList<>();
+        list.add(new BigDecimal(3));
+        list.add(new BigDecimal(2));
+        list.add(new BigDecimal(1));
+        assertTrue(list.equals(calculator.startProgram(convertToCharStream(input),null)));
+    }
 
 
 }

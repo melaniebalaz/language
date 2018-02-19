@@ -12,8 +12,9 @@ statement   : VARIABLE '=' expression                          # assignment
 function    :'('(VARIABLE (','VARIABLE)*)* ')'':' NEWLINE (statement)+'.'      # declaration
             ;
 
-languageconstruct : 'out'':' ( expression | STRING)                            # print
+languageconstruct : 'out: ' ( expression | STRING)                             # print
                   | 'foreach ' VARIABLE 'in ' expression ' do ' expression     # foreach
+                  | 'reverse: ' datacontainer                                  # reverse
                   ;
 
 //'do' expression on datacontainer

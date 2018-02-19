@@ -17,7 +17,16 @@ The language is dynamically typed, so you do not need to declare variable types.
 ###### Basics:
 
 *printing* <br>
-out: var
+`out: var`
 
 *loops* <br>
-foreach x in var do x+1
+`foreach x in var do x+1`
+
+###### Other:
+*reverse* <br>
+`reverse: "String"` <br>
+will return "gnirtS" <br>
+`reverse: 35`  <br>
+will return 35 <br>
+`reverse: list(1,2,3)`  <br>
+will return list(3,2,1)

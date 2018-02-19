@@ -23,8 +23,10 @@ public class AdvancedCalculatorVisitorImpl extends AdvancedCalculatorBaseVisitor
         }
     }
 
-    public AdvancedCalculatorVisitorImpl(OutputStream stream) {
-
+    public AdvancedCalculatorVisitorImpl(OutputStream stream, List<BuiltInFunction> functions) {
+        for (BuiltInFunction function : functions){
+            variables.put(function.getName(),function);
+        }
         this.stream = stream;
     }
 
@@ -154,6 +156,11 @@ public class AdvancedCalculatorVisitorImpl extends AdvancedCalculatorBaseVisitor
 
     }
 
+    public Object visitReverse(AdvancedCalculatorParser.ReverseContext ctx){
+        String rev = ctx.datacontainer().getText();
+        return new StringBuffer(rev).reverse().toString();
+    }
+
     public Object visitDeclaration(AdvancedCalculatorParser.DeclarationContext ctx){
         List<TerminalNode> parameters = ctx.VARIABLE();
         List<AdvancedCalculatorParser.StatementContext> statements = ctx.statement();
@@ -162,32 +169,49 @@ public class AdvancedCalculatorVisitorImpl extends AdvancedCalculatorBaseVisitor
     }
 
     public Object visitFunctionCall(AdvancedCalculatorParser.FunctionCallContext ctx){
-        Function function;
-        function = (Function)variables.get(ctx.VARIABLE().getText());
-        //Need to  catch a potential error if function has not been declared
-        if (function == null){
-            throw new RuntimeException("This function has not been declared and cannot be called");
-        }
-
-
+        Object function = variables.get(ctx.VARIABLE().getText());
         List<AdvancedCalculatorParser.ExpressionContext> param = ctx.expression();
-        //Expressions as parameters
-
-        stack.push(new LinkedHashMap<>(variables));
-
-        if (function.parameters.size() != param.size()){
-            throw new RuntimeException("Missing parameters!");
+        if (function == null){
+            throw new RuntimeException(ctx.VARIABLE().getText() + " is not declared");
         }
 
-        for (int i = 0; i < param.size(); i++){
-            variables.put(function.parameters.get(i).getText(),visit(param.get(i)));
-        }
+       if (function instanceof  BuiltInFunction){
+           BuiltInFunction castedFunction = (BuiltInFunction)function;
+           if (castedFunction.getParameterCount() != param.size()){
+               throw new RuntimeException("Missing parameters!");
+           }
+           List<Object> parameters = new ArrayList<>();
+
+           for (int i = 0; i < param.size(); i++){
+               parameters.add(visit(param.get(i)));
+           }
+           return castedFunction.execute(parameters);
+
+       }else if (function instanceof Function) {
+            Function castedFunction = (Function)function;
+           //Expressions as parameters
+
+           stack.push(new LinkedHashMap<>(variables));
+
+           if (castedFunction.parameters.size() != param.size()){
+               throw new RuntimeException("Missing parameters!");
+           }
+
+           for (int i = 0; i < param.size(); i++){
+               variables.put(castedFunction.parameters.get(i).getText(),visit(param.get(i)));
+           }
 
 
-        Object result = function.statements.stream().map(this::visit).reduce((first, second) -> second).get();
+           Object result = castedFunction.statements.stream().map(this::visit).reduce((first, second) -> second).get();
 
-        variables = stack.pop();
-        return result;
+           variables = stack.pop();
+           return result;
+       }
+       else {
+            throw new RuntimeException(ctx.VARIABLE().getText() + " is not a function");
+       }
+
+
     }
 
 
