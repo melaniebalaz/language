@@ -7,3 +7,17 @@ My goals for this language:
 * Easy to use for beginners
 * Sound similar to english, while at the same time not being too verbose
 * Personally learn about concepts like stacks and variable scope
+
+#### Implemented functionality:
+
+###### Datatypes
+The language is dynamically typed, so you do not need to declare variable types.
+**Strings** are defined with double quotes ""
+
+###### Basics:
+
+*printing* <br>
+out: var
+
+*loops* <br>
+foreach x in var do x+1
