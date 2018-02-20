@@ -24,9 +24,12 @@ public class AdvancedCalculatorVisitorImpl extends AdvancedCalculatorBaseVisitor
     }
 
     public AdvancedCalculatorVisitorImpl(OutputStream stream, List<BuiltInFunction> functions) {
-        for (BuiltInFunction function : functions){
-            variables.put(function.getName(),function);
+        if (functions != null){
+            for (BuiltInFunction function : functions){
+                variables.put(function.getName(),function);
+            }
         }
+
         this.stream = stream;
     }
 
@@ -156,10 +159,6 @@ public class AdvancedCalculatorVisitorImpl extends AdvancedCalculatorBaseVisitor
 
     }
 
-    public Object visitReverse(AdvancedCalculatorParser.ReverseContext ctx){
-        String rev = ctx.datacontainer().getText();
-        return new StringBuffer(rev).reverse().toString();
-    }
 
     public Object visitDeclaration(AdvancedCalculatorParser.DeclarationContext ctx){
         List<TerminalNode> parameters = ctx.VARIABLE();

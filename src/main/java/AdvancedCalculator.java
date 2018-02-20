@@ -8,31 +8,38 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AdvancedCalculator {
+
     public static void main(String[] args) throws IOException {
-        runProgram("program1.txt",System.out);
+        List<BuiltInFunction> functions = new ArrayList<>();
+        BuiltInFunction reverse = new ReverseFunction();
+        functions.add(reverse);
+        runProgram("program1.txt",System.out, functions);
     }
 
-    public Object startProgram(CharStream input, OutputStream stream){
+    public Object startProgram(CharStream input, OutputStream stream, List<BuiltInFunction> functions){
+
 
         final AdvancedCalculatorLexer lexer = new AdvancedCalculatorLexer(input);
         final CommonTokenStream tokens = new CommonTokenStream(lexer);
         final AdvancedCalculatorParser parser = new AdvancedCalculatorParser(tokens);
 
         final ParseTree tree = parser.program();
-        final AdvancedCalculatorVisitor<Object> visitor = new AdvancedCalculatorVisitorImpl(stream);
+        final AdvancedCalculatorVisitor<Object> visitor = new AdvancedCalculatorVisitorImpl(stream, functions);
         return visitor.visit(tree);
     }
 
-    private static Object runProgram(String filename, OutputStream stream) throws IOException {
+    private static Object runProgram(String filename, OutputStream stream, List<BuiltInFunction> functions) throws IOException {
         final CharStream input = CharStreams.fromFileName(filename);
         final AdvancedCalculatorLexer lexer = new AdvancedCalculatorLexer(input);
         final CommonTokenStream tokens = new CommonTokenStream(lexer);
         final AdvancedCalculatorParser parser = new AdvancedCalculatorParser(tokens);
 
         final ParseTree tree = parser.program();
-        final AdvancedCalculatorVisitor<Object> visitor = new AdvancedCalculatorVisitorImpl(stream);
+        final AdvancedCalculatorVisitor<Object> visitor = new AdvancedCalculatorVisitorImpl(stream, functions);
         return visitor.visit(tree);
     }
 }

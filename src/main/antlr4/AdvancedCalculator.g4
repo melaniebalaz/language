@@ -14,7 +14,6 @@ function    :'('(VARIABLE (','VARIABLE)*)* ')'':' NEWLINE (statement)+'.'      #
 
 languageconstruct : 'out: ' ( expression | STRING)                             # print
                   | 'foreach ' VARIABLE 'in ' expression ' do ' expression     # foreach
-                  | 'reverse: ' datacontainer                                  # reverse
                   ;
 
 //'do' expression on datacontainer

@@ -14,7 +14,7 @@ My goals for this language:
 The language is dynamically typed, so you do not need to declare variable types.
 **Strings** are defined with double quotes ""
 
-###### Basics:
+###### Language Constructs:
 
 *printing* <br>
 `out: var`
@@ -22,11 +22,9 @@ The language is dynamically typed, so you do not need to declare variable types.
 *loops* <br>
 `foreach x in var do x+1`
 
-###### Other:
+###### Built in Functions:
 *reverse* <br>
-`reverse: "String"` <br>
+`reverse("String")` <br>
 will return "gnirtS" <br>
-`reverse: 35`  <br>
-will return 35 <br>
-`reverse: list(1,2,3)`  <br>
+`reverse(list(1,2,3))`  <br>
 will return list(3,2,1)

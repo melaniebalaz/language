@@ -42,7 +42,7 @@ public class AdvancedCalculatorTest {
             0,
             (
                 (BigDecimal)calculator
-                    .startProgram(convertToCharStream(input), null)
+                    .startProgram(convertToCharStream(input), null, null)
             )
                     .compareTo(new BigDecimal(2))
         );
@@ -54,7 +54,7 @@ public class AdvancedCalculatorTest {
         AdvancedCalculator calculator = new AdvancedCalculator();
 
         String input = "8 / 4"+"\n";
-        assertEquals(0, ((BigDecimal)calculator.startProgram(convertToCharStream(input),null)).compareTo(new BigDecimal(2)));
+        assertEquals(0, ((BigDecimal)calculator.startProgram(convertToCharStream(input),null, null)).compareTo(new BigDecimal(2)));
 
     }
 
@@ -63,7 +63,7 @@ public class AdvancedCalculatorTest {
         AdvancedCalculator calculator = new AdvancedCalculator();
 
         String input = "test = 4"+"\n";
-        assertEquals(0, ((BigDecimal)calculator.startProgram(convertToCharStream(input),null)).compareTo(new BigDecimal(4)));
+        assertEquals(0, ((BigDecimal)calculator.startProgram(convertToCharStream(input),null, null)).compareTo(new BigDecimal(4)));
 
     }
 
@@ -72,7 +72,7 @@ public class AdvancedCalculatorTest {
         AdvancedCalculator calculator = new AdvancedCalculator();
 
         String input = "test = 4 + 5"+"\n";
-        assertEquals(0, ((BigDecimal)calculator.startProgram(convertToCharStream(input),null)).compareTo(new BigDecimal(9)));
+        assertEquals(0, ((BigDecimal)calculator.startProgram(convertToCharStream(input),null, null)).compareTo(new BigDecimal(9)));
 
     }
 
@@ -82,7 +82,7 @@ public class AdvancedCalculatorTest {
 
         String input = "test = 4 + 5"+"\n" +
                 "test + 1" +"\n";
-        assertEquals(0, ((BigDecimal)calculator.startProgram(convertToCharStream(input),null)).compareTo(new BigDecimal(10)));
+        assertEquals(0, ((BigDecimal)calculator.startProgram(convertToCharStream(input),null, null)).compareTo(new BigDecimal(10)));
 
     }
 
@@ -96,7 +96,7 @@ public class AdvancedCalculatorTest {
                 "v = 400" + "\n" +
                 "t + s" + "\n";
 
-        assertEquals(0, ((BigDecimal)calculator.startProgram(convertToCharStream(input),null)).compareTo(new BigDecimal(300)));
+        assertEquals(0, ((BigDecimal)calculator.startProgram(convertToCharStream(input),null, null)).compareTo(new BigDecimal(300)));
     }
 
     /**
@@ -125,7 +125,7 @@ public class AdvancedCalculatorTest {
 
         String input = "var = \"test variable\" " + "\n" +
                 "out: var" + "\n";
-        calculator.startProgram(convertToCharStream(input),stream);
+        calculator.startProgram(convertToCharStream(input),stream, null);
         assertEquals("test variable",new String(stream.toByteArray()));
     }
 
@@ -141,7 +141,7 @@ public class AdvancedCalculatorTest {
         list.add(new BigDecimal(1));
         list.add(new BigDecimal(2));
         list.add(new BigDecimal(3));
-        assertTrue(list.equals(calculator.startProgram(convertToCharStream(input),null)));
+        assertTrue(list.equals(calculator.startProgram(convertToCharStream(input),null, null)));
     }
 
 
@@ -154,7 +154,7 @@ public class AdvancedCalculatorTest {
         list.add(new BigDecimal(2));
         list.add(new BigDecimal(3));
         list.add(new BigDecimal(4));
-        assertTrue(list.equals(calculator.startProgram(convertToCharStream(input),null)));
+        assertTrue(list.equals(calculator.startProgram(convertToCharStream(input),null, null)));
     }
 
     @Test
@@ -163,7 +163,7 @@ public class AdvancedCalculatorTest {
         String input = "add = (a,b):" + "\n" +
                 "a+b." + "\n" +
                 "add(1,2)" + "\n";
-        assertEquals(new BigDecimal(3), calculator.startProgram(convertToCharStream(input),null));
+        assertEquals(new BigDecimal(3), calculator.startProgram(convertToCharStream(input),null, null));
     }
 
     @Test
@@ -171,7 +171,7 @@ public class AdvancedCalculatorTest {
         AdvancedCalculator calculator = new AdvancedCalculator();
         String input = "add(1,2)" + "\n";
         try {
-            calculator.startProgram(convertToCharStream(input),null);
+            calculator.startProgram(convertToCharStream(input),null, null);
             Assert.fail();
         } catch (Exception e) {}
     }
@@ -179,27 +179,26 @@ public class AdvancedCalculatorTest {
     @Test
     public void testStringReverse() {
         AdvancedCalculator calculator = new AdvancedCalculator();
-        String input = "reverse: \"test variable\"" + "\n";
-        assertEquals("elbairav tset",calculator.startProgram(convertToCharStream(input),null));
+        List<BuiltInFunction> functions = new ArrayList<>();
+        BuiltInFunction reverse = new ReverseFunction();
+        functions.add(reverse);
+        String input = "reverse(\"test variable\")" + "\n";
+        assertEquals("elbairav tset",calculator.startProgram(convertToCharStream(input),null, functions));
     }
 
-    @Test
-    public void testNumberReverse() {
-        AdvancedCalculator calculator = new AdvancedCalculator();
-        String input = "reverse: 35" + "\n";
-        assertEquals("53",calculator.startProgram(convertToCharStream(input),null));
-    }
 
     @Test
     public void testListReverse() {
         AdvancedCalculator calculator = new AdvancedCalculator();
-
-        String input = "reverse: list(1,2,3)" + "\n";
+        List<BuiltInFunction> functions = new ArrayList<>();
+        BuiltInFunction reverse = new ReverseFunction();
+        functions.add(reverse);
+        String input = "reverse(list(1,2,3))" + "\n";
         ArrayList<BigDecimal> list = new ArrayList<>();
         list.add(new BigDecimal(3));
         list.add(new BigDecimal(2));
         list.add(new BigDecimal(1));
-        assertTrue(list.equals(calculator.startProgram(convertToCharStream(input),null)));
+        assertTrue(list.equals(calculator.startProgram(convertToCharStream(input),null, functions)));
     }
 
 
