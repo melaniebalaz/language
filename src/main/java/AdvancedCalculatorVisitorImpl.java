@@ -1,4 +1,7 @@
 import org.antlr.v4.runtime.tree.TerminalNode;
+import primitives.ListType;
+import primitives.NumberType;
+import primitives.StringType;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -34,22 +37,22 @@ public class AdvancedCalculatorVisitorImpl extends AdvancedCalculatorBaseVisitor
 
 
     @Override
-    public BigDecimal visitNum(AdvancedCalculatorParser.NumContext ctx) {
-        return new BigDecimal(ctx.NUMBER().getText());
+    public NumberType visitNum(AdvancedCalculatorParser.NumContext ctx) {
+        return new NumberType(new BigDecimal(ctx.NUMBER().getText()));
     }
 
     @Override
-    public String visitString(AdvancedCalculatorParser.StringContext ctx) {
-        return (ctx.STRING().toString().replaceAll("\"",""));
+    public StringType visitString(AdvancedCalculatorParser.StringContext ctx) {
+        return new StringType(ctx.STRING().toString().replaceAll("\"",""));
     }
 
     @Override
-    public ArrayList visitList(AdvancedCalculatorParser.ListContext ctx){
+    public ListType visitList(AdvancedCalculatorParser.ListContext ctx){
         ArrayList<Object> list = new ArrayList<>();
         for (AdvancedCalculatorParser.DatacontainerContext data : ctx.datacontainer()) {
             list.add(visit(data));
         }
-        return list;
+        return new ListType(list);
     }
 
     @Override
