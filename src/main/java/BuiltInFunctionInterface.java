@@ -1,6 +1,6 @@
 import java.util.List;
 
-interface BuiltInFunction {
+interface BuiltInFunctionInterface {
 
     public String getName();
     public int getParameterCount();

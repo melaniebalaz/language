@@ -1,6 +1,8 @@
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-public class ReverseFunction implements BuiltInFunction{
+public class ReverseFunction implements BuiltInFunctionInterface {
 
     String name = "reverse";
 
@@ -21,6 +23,11 @@ public class ReverseFunction implements BuiltInFunction{
         }
         if (parameters.get(0) instanceof String) {
             return new StringBuffer(((String)parameters.get(0))).reverse().toString();
+        }
+        else if (parameters.get(0) instanceof List){
+            List list = new ArrayList(((List)parameters.get(0)));
+            Collections.reverse(list);
+            return list;
         }
         else return null;
     }

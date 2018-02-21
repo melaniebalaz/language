@@ -1,15 +1,12 @@
-import org.antlr.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.junit.Assert;
-import org.junit.Rule;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -179,8 +176,8 @@ public class AdvancedCalculatorTest {
     @Test
     public void testStringReverse() {
         AdvancedCalculator calculator = new AdvancedCalculator();
-        List<BuiltInFunction> functions = new ArrayList<>();
-        BuiltInFunction reverse = new ReverseFunction();
+        List<BuiltInFunctionInterface> functions = new ArrayList<>();
+        BuiltInFunctionInterface reverse = new ReverseFunction();
         functions.add(reverse);
         String input = "reverse(\"test variable\")" + "\n";
         assertEquals("elbairav tset",calculator.startProgram(convertToCharStream(input),null, functions));
@@ -190,8 +187,8 @@ public class AdvancedCalculatorTest {
     @Test
     public void testListReverse() {
         AdvancedCalculator calculator = new AdvancedCalculator();
-        List<BuiltInFunction> functions = new ArrayList<>();
-        BuiltInFunction reverse = new ReverseFunction();
+        List<BuiltInFunctionInterface> functions = new ArrayList<>();
+        BuiltInFunctionInterface reverse = new ReverseFunction();
         functions.add(reverse);
         String input = "reverse(list(1,2,3))" + "\n";
         ArrayList<BigDecimal> list = new ArrayList<>();

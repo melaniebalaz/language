@@ -1,6 +1,5 @@
 import org.antlr.v4.runtime.tree.TerminalNode;
 
-import java.beans.Expression;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.math.BigDecimal;
@@ -23,9 +22,9 @@ public class AdvancedCalculatorVisitorImpl extends AdvancedCalculatorBaseVisitor
         }
     }
 
-    public AdvancedCalculatorVisitorImpl(OutputStream stream, List<BuiltInFunction> functions) {
+    public AdvancedCalculatorVisitorImpl(OutputStream stream, List<BuiltInFunctionInterface> functions) {
         if (functions != null){
-            for (BuiltInFunction function : functions){
+            for (BuiltInFunctionInterface function : functions){
                 variables.put(function.getName(),function);
             }
         }
@@ -174,8 +173,8 @@ public class AdvancedCalculatorVisitorImpl extends AdvancedCalculatorBaseVisitor
             throw new RuntimeException(ctx.VARIABLE().getText() + " is not declared");
         }
 
-       if (function instanceof  BuiltInFunction){
-           BuiltInFunction castedFunction = (BuiltInFunction)function;
+       if (function instanceof BuiltInFunctionInterface){
+           BuiltInFunctionInterface castedFunction = (BuiltInFunctionInterface)function;
            if (castedFunction.getParameterCount() != param.size()){
                throw new RuntimeException("Missing parameters!");
            }
