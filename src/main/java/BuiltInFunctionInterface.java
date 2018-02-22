@@ -1,8 +1,10 @@
+import primitives.DataTypeInterface;
+
 import java.util.List;
 
-interface BuiltInFunctionInterface {
+interface BuiltInFunctionInterface extends DataTypeInterface{
 
     public String getName();
     public int getParameterCount();
-    public Object execute(List<Object> parameters);
+    public DataTypeInterface execute(List<DataTypeInterface> parameters);
 }

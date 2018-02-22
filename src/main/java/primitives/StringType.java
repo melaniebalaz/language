@@ -1,6 +1,10 @@
 package primitives;
 
-public class StringType implements DataTypeInterface<String>, ReversibleInterface {
+import operations.AdditionInterface;
+import operations.MultiplicationInterface;
+
+public class StringType implements DataTypeInterface<String>, ReversibleInterface<StringType>,
+        AdditionInterface<StringType> {
 
     private final String data;
 
@@ -9,7 +13,7 @@ public class StringType implements DataTypeInterface<String>, ReversibleInterfac
     }
 
     @Override
-    public DataTypeInterface<String> reverseData() {
+    public StringType reverseData() {
         return new StringType(
                 new StringBuffer(data)
                         .reverse()
@@ -20,6 +24,11 @@ public class StringType implements DataTypeInterface<String>, ReversibleInterfac
     @Override
     public String getRawType() {
         return data;
+    }
+
+    @Override
+    public StringType add(StringType a) {
+        return new StringType( data + a);
     }
 }
 

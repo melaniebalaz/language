@@ -1,4 +1,5 @@
 import org.antlr.v4.runtime.tree.TerminalNode;
+import primitives.DataTypeInterface;
 import primitives.ListType;
 import primitives.NumberType;
 import primitives.StringType;
@@ -9,21 +10,11 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.*;
 
-public class AdvancedCalculatorVisitorImpl extends AdvancedCalculatorBaseVisitor<Object> {
+public class AdvancedCalculatorVisitorImpl extends AdvancedCalculatorBaseVisitor<DataTypeInterface> {
 
     private final OutputStream stream;
-    private LinkedHashMap<String, Object> variables = new LinkedHashMap<>();
-    private Stack<LinkedHashMap<String,Object>> stack = new Stack<>();
-
-    private class Function {
-        private List<TerminalNode> parameters;
-        private List<AdvancedCalculatorParser.StatementContext> statements;
-
-        private Function(List<TerminalNode> parameters, List<AdvancedCalculatorParser.StatementContext> statements) {
-            this.parameters = parameters;
-            this.statements = statements;
-        }
-    }
+    private LinkedHashMap<String, DataTypeInterface> variables = new LinkedHashMap<>();
+    private Stack<LinkedHashMap<String,DataTypeInterface>> stack = new Stack<>();
 
     public AdvancedCalculatorVisitorImpl(OutputStream stream, List<BuiltInFunctionInterface> functions) {
         if (functions != null){
@@ -56,12 +47,20 @@ public class AdvancedCalculatorVisitorImpl extends AdvancedCalculatorBaseVisitor
     }
 
     @Override
+    public DataTypeInterface visitAssignment(AdvancedCalculatorParser.AssignmentContext ctx) {
+        final String variableName = (ctx.VARIABLE().getText());
+        final DataTypeInterface right = visit(ctx.expression());
+        this.variables.put(variableName,right);
+        return right;
+    }
+
+    @Override
     /**
      * Returns the value of a variable being used as part of an expression
      * Variable needs to already have a value set as part of an expression
      * @throws: Runtime Exception
      */
-    public Object visitVar(AdvancedCalculatorParser.VarContext ctx){
+    public DataTypeInterface visitVar(AdvancedCalculatorParser.VarContext ctx){
         String variableName = (ctx.VARIABLE().getText());
         if (!this.variables.containsKey(variableName)){
             throw new RuntimeException("Variable not set");
@@ -70,14 +69,14 @@ public class AdvancedCalculatorVisitorImpl extends AdvancedCalculatorBaseVisitor
     }
 
     @Override
-    public Object visitParens(AdvancedCalculatorParser.ParensContext ctx) {
+    public DataTypeInterface visitParens(AdvancedCalculatorParser.ParensContext ctx) {
         return visit(ctx.expression());
     }
 
     @Override
-    public BigDecimal visitMulDiv(AdvancedCalculatorParser.MulDivContext ctx) {
-        final Object left = visit(ctx.expression(0));
-        final Object right = visit(ctx.expression(1));
+    public DataTypeInterface visitMulDiv(AdvancedCalculatorParser.MulDivContext ctx) {
+        final DataTypeInterface left = visit(ctx.expression(0));
+        final DataTypeInterface right = visit(ctx.expression(1));
         if (left instanceof BigDecimal && right instanceof BigDecimal){
             if (ctx.op.getText().equals("*")) {
                 return ((BigDecimal)left).multiply((BigDecimal)right);
@@ -91,9 +90,9 @@ public class AdvancedCalculatorVisitorImpl extends AdvancedCalculatorBaseVisitor
     }
 
     @Override
-    public BigDecimal visitAddSub(AdvancedCalculatorParser.AddSubContext ctx) {
-        final Object left = visit(ctx.expression(0));
-        final Object right = visit(ctx.expression(1));
+    public DataTypeInterface visitAddSub(AdvancedCalculatorParser.AddSubContext ctx) {
+        final DataTypeInterface left = visit(ctx.expression(0));
+        final DataTypeInterface right = visit(ctx.expression(1));
         if (left instanceof BigDecimal && right instanceof BigDecimal){
             if (ctx.op.getText().equals("+")) {
                 return ((BigDecimal)left).add((BigDecimal)right);
@@ -104,24 +103,15 @@ public class AdvancedCalculatorVisitorImpl extends AdvancedCalculatorBaseVisitor
         else throw new RuntimeException("Cannot perform this operation on these datatypes: " +  left.getClass().getName() );
     }
 
-
     @Override
-    public Object visitAssignment(AdvancedCalculatorParser.AssignmentContext ctx) {
-        final String variableName = (ctx.VARIABLE().getText());
-        final Object right = visit(ctx.expression());
-        this.variables.put(variableName,right);
-        return right;
-    }
-
-    @Override
-    public Object visitStart(AdvancedCalculatorParser.StartContext ctx) {
+    public DataTypeInterface visitStart(AdvancedCalculatorParser.StartContext ctx) {
         List<AdvancedCalculatorParser.StatementContext> statements = ctx.statement();
         //returns the result of the last visit call
         return statements.stream().map(this::visit).reduce((first, second) -> second).get();
     }
 
     @Override
-    public Object visitPrint(AdvancedCalculatorParser.PrintContext ctx) {
+    public DataTypeInterface visitPrint(AdvancedCalculatorParser.PrintContext ctx) {
         String value = visit(ctx.expression()).toString();
         try {
             stream.write(value.getBytes());
@@ -138,8 +128,8 @@ public class AdvancedCalculatorVisitorImpl extends AdvancedCalculatorBaseVisitor
      * @return
      * 'foreach ' VARIABLE 'in ' expression ' do ' expressio
      */
-    public Object visitForeach(AdvancedCalculatorParser.ForeachContext ctx){
-        Object value = visit(ctx.expression(0));
+    public DataTypeInterface visitForeach(AdvancedCalculatorParser.ForeachContext ctx){
+        DataTypeInterface value = visit(ctx.expression(0));
 
         //if value is not a list, make a singleton list out of it
         if (!(value instanceof List)){
@@ -149,8 +139,8 @@ public class AdvancedCalculatorVisitorImpl extends AdvancedCalculatorBaseVisitor
 
         stack.push(new LinkedHashMap<>(variables));
 
-        List<Object> result = new ArrayList<>();
-        for (Object item : ((List)value)){
+        List<DataTypeInterface> result = new ArrayList<>();
+        for (DataTypeInterface item : ((List)value)){
             this.variables.put(ctx.VARIABLE().getText(), item);
             result.add(visit(ctx.expression(1)));
         }
@@ -162,14 +152,14 @@ public class AdvancedCalculatorVisitorImpl extends AdvancedCalculatorBaseVisitor
     }
 
 
-    public Object visitDeclaration(AdvancedCalculatorParser.DeclarationContext ctx){
+    public DataTypeInterface visitDeclaration(AdvancedCalculatorParser.DeclarationContext ctx){
         List<TerminalNode> parameters = ctx.VARIABLE();
         List<AdvancedCalculatorParser.StatementContext> statements = ctx.statement();
 
-        return new Function(parameters,statements);
+        return new FunctionType(parameters,statements);
     }
 
-    public Object visitFunctionCall(AdvancedCalculatorParser.FunctionCallContext ctx){
+    public DataTypeInterface visitFunctionCall(AdvancedCalculatorParser.FunctionCallContext ctx){
         Object function = variables.get(ctx.VARIABLE().getText());
         List<AdvancedCalculatorParser.ExpressionContext> param = ctx.expression();
         if (function == null){
@@ -181,29 +171,29 @@ public class AdvancedCalculatorVisitorImpl extends AdvancedCalculatorBaseVisitor
            if (castedFunction.getParameterCount() != param.size()){
                throw new RuntimeException("Missing parameters!");
            }
-           List<Object> parameters = new ArrayList<>();
+           List<DataTypeInterface> parameters = new ArrayList<>();
 
            for (int i = 0; i < param.size(); i++){
                parameters.add(visit(param.get(i)));
            }
            return castedFunction.execute(parameters);
 
-       }else if (function instanceof Function) {
-            Function castedFunction = (Function)function;
+       }else if (function instanceof FunctionType) {
+            FunctionType castedFunction = (FunctionType)function;
            //Expressions as parameters
 
            stack.push(new LinkedHashMap<>(variables));
 
-           if (castedFunction.parameters.size() != param.size()){
+           if (castedFunction.getParameters().size() != param.size()){
                throw new RuntimeException("Missing parameters!");
            }
 
            for (int i = 0; i < param.size(); i++){
-               variables.put(castedFunction.parameters.get(i).getText(),visit(param.get(i)));
+               variables.put(castedFunction.getParameters().get(i).getText(),visit(param.get(i)));
            }
 
 
-           Object result = castedFunction.statements.stream().map(this::visit).reduce((first, second) -> second).get();
+           DataTypeInterface result = castedFunction.getStatements().stream().map(this::visit).reduce((first, second) -> second).get();
 
            variables = stack.pop();
            return result;
