@@ -19,8 +19,10 @@ languageconstruct : 'out: ' ( expression | STRING)                             #
 //'do' expression on datacontainer
 
 expression  : '(' expression ')'                    # parens
-            | expression op=('*' | '/') expression  # mulDiv
-            | expression op=('+' | '-') expression  # addSub
+            | expression '*' expression             # mul
+            | expression '/' expression             # div
+            | expression '+' expression             # add
+            | expression '-' expression             # sub
             | datacontainer                              # data
             | function                                   # func
             | VARIABLE'('(expression (','expression)*)*')' #functionCall

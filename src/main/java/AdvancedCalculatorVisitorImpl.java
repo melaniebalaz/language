@@ -1,3 +1,7 @@
+import operations.AdditionInterface;
+import operations.DivisionInterface;
+import operations.MultiplicationInterface;
+import operations.SubtractionInterface;
 import org.antlr.v4.runtime.tree.TerminalNode;
 import primitives.DataTypeInterface;
 import primitives.ListType;
@@ -39,7 +43,7 @@ public class AdvancedCalculatorVisitorImpl extends AdvancedCalculatorBaseVisitor
 
     @Override
     public ListType visitList(AdvancedCalculatorParser.ListContext ctx){
-        ArrayList<Object> list = new ArrayList<>();
+        List<DataTypeInterface<?>> list = new ArrayList<>();
         for (AdvancedCalculatorParser.DatacontainerContext data : ctx.datacontainer()) {
             list.add(visit(data));
         }
@@ -73,6 +77,43 @@ public class AdvancedCalculatorVisitorImpl extends AdvancedCalculatorBaseVisitor
         return visit(ctx.expression());
     }
 
+    public DataTypeInterface visitAdd(AdvancedCalculatorParser.AddContext ctx) {
+        DataTypeInterface left = visit(ctx.expression(0));
+        DataTypeInterface right = visit(ctx.expression(1));
+        if (left instanceof AdditionInterface && right instanceof AdditionInterface){
+            return ((AdditionInterface) left).add(right);
+        }
+        else throw new RuntimeException("Cannot add " + left.getClass().getName() + " and " + right.getClass().getName());
+    }
+
+    public DataTypeInterface visitSub(AdvancedCalculatorParser.SubContext ctx) {
+        DataTypeInterface left = visit(ctx.expression(0));
+        DataTypeInterface right = visit(ctx.expression(1));
+        if (left instanceof SubtractionInterface && right instanceof SubtractionInterface){
+            return ((SubtractionInterface) left).subtract(right);
+        }
+        else throw new RuntimeException("Cannot add " + left.getClass().getName() + " and " + right.getClass().getName());
+    }
+
+    public DataTypeInterface visitMul(AdvancedCalculatorParser.MulContext ctx) {
+        DataTypeInterface left = visit(ctx.expression(0));
+        DataTypeInterface right = visit(ctx.expression(1));
+        if (left instanceof MultiplicationInterface && right instanceof MultiplicationInterface){
+            return ((MultiplicationInterface) left).multiply(right);
+        }
+        else throw new RuntimeException("Cannot add " + left.getClass().getName() + " and " + right.getClass().getName());
+    }
+
+    public DataTypeInterface visitDiv(AdvancedCalculatorParser.DivContext ctx) {
+        DataTypeInterface left = visit(ctx.expression(0));
+        DataTypeInterface right = visit(ctx.expression(1));
+        if (left instanceof DivisionInterface && right instanceof DivisionInterface){
+            return ((DivisionInterface) left).divide(right);
+        }
+        else throw new RuntimeException("Cannot add " + left.getClass().getName() + " and " + right.getClass().getName());
+    }
+
+    /**
     @Override
     public DataTypeInterface visitMulDiv(AdvancedCalculatorParser.MulDivContext ctx) {
         final DataTypeInterface left = visit(ctx.expression(0));
@@ -88,7 +129,9 @@ public class AdvancedCalculatorVisitorImpl extends AdvancedCalculatorBaseVisitor
 
 
     }
+    **/
 
+    /**
     @Override
     public DataTypeInterface visitAddSub(AdvancedCalculatorParser.AddSubContext ctx) {
         final DataTypeInterface left = visit(ctx.expression(0));
@@ -102,6 +145,7 @@ public class AdvancedCalculatorVisitorImpl extends AdvancedCalculatorBaseVisitor
         }
         else throw new RuntimeException("Cannot perform this operation on these datatypes: " +  left.getClass().getName() );
     }
+     **/
 
     @Override
     public DataTypeInterface visitStart(AdvancedCalculatorParser.StartContext ctx) {
@@ -112,13 +156,14 @@ public class AdvancedCalculatorVisitorImpl extends AdvancedCalculatorBaseVisitor
 
     @Override
     public DataTypeInterface visitPrint(AdvancedCalculatorParser.PrintContext ctx) {
-        String value = visit(ctx.expression()).toString();
+        DataTypeInterface value = visit(ctx.expression());
+        String string = value.getRawType().toString();
         try {
-            stream.write(value.getBytes());
+            stream.write(string.getBytes());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return value;
+        return new StringType(string);
     }
 
 
@@ -128,26 +173,26 @@ public class AdvancedCalculatorVisitorImpl extends AdvancedCalculatorBaseVisitor
      * @return
      * 'foreach ' VARIABLE 'in ' expression ' do ' expressio
      */
-    public DataTypeInterface visitForeach(AdvancedCalculatorParser.ForeachContext ctx){
+    public ListType visitForeach(AdvancedCalculatorParser.ForeachContext ctx){
         DataTypeInterface value = visit(ctx.expression(0));
 
         //if value is not a list, make a singleton list out of it
-        if (!(value instanceof List)){
+        if (!(value instanceof ListType)){
            throw new RuntimeException("Foreach can only be applied to a list");
         }
 
 
         stack.push(new LinkedHashMap<>(variables));
 
-        List<DataTypeInterface> result = new ArrayList<>();
-        for (DataTypeInterface item : ((List)value)){
+        List<DataTypeInterface<?>> result = new ArrayList<>();
+        for (DataTypeInterface item : (List<DataTypeInterface>)value.getRawType()){
             this.variables.put(ctx.VARIABLE().getText(), item);
             result.add(visit(ctx.expression(1)));
         }
 
         variables = stack.pop();
 
-        return result;
+        return new ListType(result);
 
     }
 

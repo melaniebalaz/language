@@ -59,12 +59,26 @@ public interface AdvancedCalculatorVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitForeach(AdvancedCalculatorParser.ForeachContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code reverse}
-	 * labeled alternative in {@link AdvancedCalculatorParser#languageconstruct}.
+	 * Visit a parse tree produced by the {@code div}
+	 * labeled alternative in {@link AdvancedCalculatorParser#expression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitReverse(AdvancedCalculatorParser.ReverseContext ctx);
+	T visitDiv(AdvancedCalculatorParser.DivContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code add}
+	 * labeled alternative in {@link AdvancedCalculatorParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAdd(AdvancedCalculatorParser.AddContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code sub}
+	 * labeled alternative in {@link AdvancedCalculatorParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSub(AdvancedCalculatorParser.SubContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code parens}
 	 * labeled alternative in {@link AdvancedCalculatorParser#expression}.
@@ -87,26 +101,19 @@ public interface AdvancedCalculatorVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitFunc(AdvancedCalculatorParser.FuncContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code mul}
+	 * labeled alternative in {@link AdvancedCalculatorParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMul(AdvancedCalculatorParser.MulContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code functionCall}
 	 * labeled alternative in {@link AdvancedCalculatorParser#expression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitFunctionCall(AdvancedCalculatorParser.FunctionCallContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code addSub}
-	 * labeled alternative in {@link AdvancedCalculatorParser#expression}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitAddSub(AdvancedCalculatorParser.AddSubContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code mulDiv}
-	 * labeled alternative in {@link AdvancedCalculatorParser#expression}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitMulDiv(AdvancedCalculatorParser.MulDivContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code num}
 	 * labeled alternative in {@link AdvancedCalculatorParser#datacontainer}.

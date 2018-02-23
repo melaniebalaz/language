@@ -99,13 +99,37 @@ public class AdvancedCalculatorBaseListener implements AdvancedCalculatorListene
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterReverse(AdvancedCalculatorParser.ReverseContext ctx) { }
+	@Override public void enterDiv(AdvancedCalculatorParser.DivContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitReverse(AdvancedCalculatorParser.ReverseContext ctx) { }
+	@Override public void exitDiv(AdvancedCalculatorParser.DivContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAdd(AdvancedCalculatorParser.AddContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAdd(AdvancedCalculatorParser.AddContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterSub(AdvancedCalculatorParser.SubContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSub(AdvancedCalculatorParser.SubContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -147,6 +171,18 @@ public class AdvancedCalculatorBaseListener implements AdvancedCalculatorListene
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterMul(AdvancedCalculatorParser.MulContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitMul(AdvancedCalculatorParser.MulContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterFunctionCall(AdvancedCalculatorParser.FunctionCallContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -154,30 +190,6 @@ public class AdvancedCalculatorBaseListener implements AdvancedCalculatorListene
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitFunctionCall(AdvancedCalculatorParser.FunctionCallContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterAddSub(AdvancedCalculatorParser.AddSubContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitAddSub(AdvancedCalculatorParser.AddSubContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterMulDiv(AdvancedCalculatorParser.MulDivContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitMulDiv(AdvancedCalculatorParser.MulDivContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

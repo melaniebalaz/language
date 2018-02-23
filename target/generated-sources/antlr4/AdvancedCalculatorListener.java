@@ -91,17 +91,41 @@ public interface AdvancedCalculatorListener extends ParseTreeListener {
 	 */
 	void exitForeach(AdvancedCalculatorParser.ForeachContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code reverse}
-	 * labeled alternative in {@link AdvancedCalculatorParser#languageconstruct}.
+	 * Enter a parse tree produced by the {@code div}
+	 * labeled alternative in {@link AdvancedCalculatorParser#expression}.
 	 * @param ctx the parse tree
 	 */
-	void enterReverse(AdvancedCalculatorParser.ReverseContext ctx);
+	void enterDiv(AdvancedCalculatorParser.DivContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code reverse}
-	 * labeled alternative in {@link AdvancedCalculatorParser#languageconstruct}.
+	 * Exit a parse tree produced by the {@code div}
+	 * labeled alternative in {@link AdvancedCalculatorParser#expression}.
 	 * @param ctx the parse tree
 	 */
-	void exitReverse(AdvancedCalculatorParser.ReverseContext ctx);
+	void exitDiv(AdvancedCalculatorParser.DivContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code add}
+	 * labeled alternative in {@link AdvancedCalculatorParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterAdd(AdvancedCalculatorParser.AddContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code add}
+	 * labeled alternative in {@link AdvancedCalculatorParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitAdd(AdvancedCalculatorParser.AddContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code sub}
+	 * labeled alternative in {@link AdvancedCalculatorParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterSub(AdvancedCalculatorParser.SubContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code sub}
+	 * labeled alternative in {@link AdvancedCalculatorParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitSub(AdvancedCalculatorParser.SubContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code parens}
 	 * labeled alternative in {@link AdvancedCalculatorParser#expression}.
@@ -139,6 +163,18 @@ public interface AdvancedCalculatorListener extends ParseTreeListener {
 	 */
 	void exitFunc(AdvancedCalculatorParser.FuncContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code mul}
+	 * labeled alternative in {@link AdvancedCalculatorParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterMul(AdvancedCalculatorParser.MulContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code mul}
+	 * labeled alternative in {@link AdvancedCalculatorParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitMul(AdvancedCalculatorParser.MulContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code functionCall}
 	 * labeled alternative in {@link AdvancedCalculatorParser#expression}.
 	 * @param ctx the parse tree
@@ -150,30 +186,6 @@ public interface AdvancedCalculatorListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitFunctionCall(AdvancedCalculatorParser.FunctionCallContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code addSub}
-	 * labeled alternative in {@link AdvancedCalculatorParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void enterAddSub(AdvancedCalculatorParser.AddSubContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code addSub}
-	 * labeled alternative in {@link AdvancedCalculatorParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void exitAddSub(AdvancedCalculatorParser.AddSubContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code mulDiv}
-	 * labeled alternative in {@link AdvancedCalculatorParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void enterMulDiv(AdvancedCalculatorParser.MulDivContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code mulDiv}
-	 * labeled alternative in {@link AdvancedCalculatorParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void exitMulDiv(AdvancedCalculatorParser.MulDivContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code num}
 	 * labeled alternative in {@link AdvancedCalculatorParser#datacontainer}.

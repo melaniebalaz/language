@@ -7,27 +7,28 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class ListType implements DataTypeInterface<List>, ReversibleInterface, AdditionInterface {
-    private final List<Object> data;
+public class ListType implements DataTypeInterface<List<DataTypeInterface<?>>>,
+        ReversibleInterface, AdditionInterface {
+    private final List<DataTypeInterface<?>> data;
 
-    public ListType(List<Object> data) {
+    public ListType(List<DataTypeInterface<?>> data) {
         this.data = data;
     }
 
     @Override
-    public DataTypeInterface<List> reverseData() {
-        List list = new ArrayList(data);
+    public DataTypeInterface<List<DataTypeInterface<?>>> reverseData() {
+        List<DataTypeInterface<?>> list = new ArrayList<>(data);
         Collections.reverse(list);
         return new ListType(list);
     }
 
     @Override
-    public List getRawType() {
+    public List<DataTypeInterface<?>> getRawType() {
         return data;
     }
 
     @Override
-    public DataTypeInterface add(DataTypeInterface a, DataTypeInterface b) {
+    public ListType add(DataTypeInterface a) {
         return null;
     }
 }

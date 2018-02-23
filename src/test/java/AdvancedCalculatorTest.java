@@ -2,6 +2,10 @@ import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.junit.Assert;
 import org.junit.Test;
+import primitives.DataTypeInterface;
+import primitives.ListType;
+import primitives.NumberType;
+import primitives.StringType;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -35,11 +39,13 @@ public class AdvancedCalculatorTest {
         AdvancedCalculator calculator = new AdvancedCalculator();
 
         String input = "1 + 1"+"\n";
+        NumberType output = (NumberType)calculator
+                .startProgram(convertToCharStream(input), null, null);
+
         assertEquals(
             0,
             (
-                (BigDecimal)calculator
-                    .startProgram(convertToCharStream(input), null, null)
+                output.getRawType()
             )
                     .compareTo(new BigDecimal(2))
         );
@@ -51,7 +57,9 @@ public class AdvancedCalculatorTest {
         AdvancedCalculator calculator = new AdvancedCalculator();
 
         String input = "8 / 4"+"\n";
-        assertEquals(0, ((BigDecimal)calculator.startProgram(convertToCharStream(input),null, null)).compareTo(new BigDecimal(2)));
+        NumberType output = (NumberType)calculator
+                .startProgram(convertToCharStream(input), null, null);
+        assertEquals(0, (output.getRawType()).compareTo(new BigDecimal(2)));
 
     }
 
@@ -60,7 +68,9 @@ public class AdvancedCalculatorTest {
         AdvancedCalculator calculator = new AdvancedCalculator();
 
         String input = "test = 4"+"\n";
-        assertEquals(0, ((BigDecimal)calculator.startProgram(convertToCharStream(input),null, null)).compareTo(new BigDecimal(4)));
+        NumberType output = (NumberType)calculator
+                .startProgram(convertToCharStream(input), null, null);
+        assertEquals(0, (output.getRawType()).compareTo(new BigDecimal(4)));
 
     }
 
@@ -69,7 +79,9 @@ public class AdvancedCalculatorTest {
         AdvancedCalculator calculator = new AdvancedCalculator();
 
         String input = "test = 4 + 5"+"\n";
-        assertEquals(0, ((BigDecimal)calculator.startProgram(convertToCharStream(input),null, null)).compareTo(new BigDecimal(9)));
+        NumberType output = (NumberType)calculator
+                .startProgram(convertToCharStream(input), null, null);
+        assertEquals(0, (output.getRawType()).compareTo(new BigDecimal(9)));
 
     }
 
@@ -79,7 +91,9 @@ public class AdvancedCalculatorTest {
 
         String input = "test = 4 + 5"+"\n" +
                 "test + 1" +"\n";
-        assertEquals(0, ((BigDecimal)calculator.startProgram(convertToCharStream(input),null, null)).compareTo(new BigDecimal(10)));
+        NumberType output = (NumberType)calculator
+                .startProgram(convertToCharStream(input), null, null);
+        assertEquals(0, (output.getRawType()).compareTo(new BigDecimal(10)));
 
     }
 
@@ -92,8 +106,10 @@ public class AdvancedCalculatorTest {
                 "u = 300" + "\n" +
                 "v = 400" + "\n" +
                 "t + s" + "\n";
+        NumberType output = (NumberType)calculator
+                .startProgram(convertToCharStream(input), null, null);
 
-        assertEquals(0, ((BigDecimal)calculator.startProgram(convertToCharStream(input),null, null)).compareTo(new BigDecimal(300)));
+        assertEquals(0, (output.getRawType()).compareTo(new BigDecimal(300)));
     }
 
     /**
@@ -134,11 +150,17 @@ public class AdvancedCalculatorTest {
 
         String input = "var = list(1,2,3)" + "\n" +
                 "var" + "\n";
-        ArrayList<BigDecimal> list = new ArrayList<>();
-        list.add(new BigDecimal(1));
-        list.add(new BigDecimal(2));
-        list.add(new BigDecimal(3));
-        assertTrue(list.equals(calculator.startProgram(convertToCharStream(input),null, null)));
+        List<BigDecimal> expected = new ArrayList<>();
+        expected.add(new BigDecimal(1));
+        expected.add(new BigDecimal(2));
+        expected.add(new BigDecimal(3));
+        ListType output = (ListType)calculator
+                .startProgram(convertToCharStream(input), null, null);
+        List<BigDecimal> result = new ArrayList<>();
+        for (DataTypeInterface value : output.getRawType()){
+            result.add((BigDecimal)value.getRawType());
+        }
+        assertTrue(expected.equals(result));
     }
 
 
@@ -147,11 +169,17 @@ public class AdvancedCalculatorTest {
         AdvancedCalculator calculator = new AdvancedCalculator();
         String input = "var = list(1,2,3)" + "\n" +
                 "foreach x in var do x+1" + "\n";
-        ArrayList<BigDecimal> list = new ArrayList<>();
-        list.add(new BigDecimal(2));
-        list.add(new BigDecimal(3));
-        list.add(new BigDecimal(4));
-        assertTrue(list.equals(calculator.startProgram(convertToCharStream(input),null, null)));
+        ArrayList<BigDecimal> expected = new ArrayList<>();
+        expected.add(new BigDecimal(2));
+        expected.add(new BigDecimal(3));
+        expected.add(new BigDecimal(4));
+        ListType output = (ListType)calculator
+                .startProgram(convertToCharStream(input), null, null);
+        List<BigDecimal> result = new ArrayList<>();
+        for (DataTypeInterface value : output.getRawType()){
+            result.add((BigDecimal)value.getRawType());
+        }
+        assertTrue(expected.equals(result));
     }
 
     @Test
@@ -160,7 +188,9 @@ public class AdvancedCalculatorTest {
         String input = "add = (a,b):" + "\n" +
                 "a+b." + "\n" +
                 "add(1,2)" + "\n";
-        assertEquals(new BigDecimal(3), calculator.startProgram(convertToCharStream(input),null, null));
+        NumberType output = (NumberType)calculator
+                .startProgram(convertToCharStream(input), null, null);
+        assertEquals(new BigDecimal(3), output.getRawType());
     }
 
     @Test
@@ -180,7 +210,9 @@ public class AdvancedCalculatorTest {
         BuiltInFunctionInterface reverse = new ReverseFunction();
         functions.add(reverse);
         String input = "reverse(\"test variable\")" + "\n";
-        assertEquals("elbairav tset",calculator.startProgram(convertToCharStream(input),null, functions));
+        StringType output = (StringType)calculator
+                .startProgram(convertToCharStream(input), null, functions);
+        assertEquals("elbairav tset",output.getRawType());
     }
 
 
@@ -191,11 +223,17 @@ public class AdvancedCalculatorTest {
         BuiltInFunctionInterface reverse = new ReverseFunction();
         functions.add(reverse);
         String input = "reverse(list(1,2,3))" + "\n";
-        ArrayList<BigDecimal> list = new ArrayList<>();
-        list.add(new BigDecimal(3));
-        list.add(new BigDecimal(2));
-        list.add(new BigDecimal(1));
-        assertTrue(list.equals(calculator.startProgram(convertToCharStream(input),null, functions)));
+        ArrayList<BigDecimal> expected = new ArrayList<>();
+        expected.add(new BigDecimal(3));
+        expected.add(new BigDecimal(2));
+        expected.add(new BigDecimal(1));
+        ListType output = (ListType)calculator
+                .startProgram(convertToCharStream(input), null, functions);
+        List<BigDecimal> result = new ArrayList<>();
+        for (DataTypeInterface value : output.getRawType()){
+            result.add((BigDecimal)value.getRawType());
+        }
+        assertTrue(expected.equals(result));
     }
 
 

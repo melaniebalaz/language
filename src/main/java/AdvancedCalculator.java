@@ -2,6 +2,7 @@ import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
+import primitives.DataTypeInterface;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -25,7 +26,7 @@ public class AdvancedCalculator {
         final AdvancedCalculatorParser parser = new AdvancedCalculatorParser(tokens);
 
         final ParseTree tree = parser.program();
-        final AdvancedCalculatorVisitor<Object> visitor = new AdvancedCalculatorVisitorImpl(stream, functions);
+        final AdvancedCalculatorVisitor<DataTypeInterface> visitor = new AdvancedCalculatorVisitorImpl(stream, functions);
         return visitor.visit(tree);
     }
 
@@ -36,7 +37,7 @@ public class AdvancedCalculator {
         final AdvancedCalculatorParser parser = new AdvancedCalculatorParser(tokens);
 
         final ParseTree tree = parser.program();
-        final AdvancedCalculatorVisitor<Object> visitor = new AdvancedCalculatorVisitorImpl(stream, functions);
+        final AdvancedCalculatorVisitor<DataTypeInterface> visitor = new AdvancedCalculatorVisitorImpl(stream, functions);
         return visitor.visit(tree);
     }
 }
