@@ -28,10 +28,11 @@ expression  : '(' expression ')'                    # parens
             | VARIABLE'('(expression (','expression)*)*')' #functionCall
             ;
 
-datacontainer    : NUMBER                                          # num
-                 | VARIABLE                                        # var
-                 | STRING                                          # string
-                 | 'list('(datacontainer(','datacontainer)*)')'    # list
+datacontainer    : NUMBER                                                                # num
+                 | VARIABLE                                                              # var
+                 | STRING                                                                # string
+                 | 'list('(datacontainer(','datacontainer)*)')'                          # list
+                 | '['(VARIABLE ':' datacontainer(','VARIABLE ':' datacontainer)*)']'    # dictionary
                  ;
 
 

@@ -3,10 +3,7 @@ import operations.DivisionInterface;
 import operations.MultiplicationInterface;
 import operations.SubtractionInterface;
 import org.antlr.v4.runtime.tree.TerminalNode;
-import primitives.DataTypeInterface;
-import primitives.ListType;
-import primitives.NumberType;
-import primitives.StringType;
+import primitives.*;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -48,6 +45,26 @@ public class AdvancedCalculatorVisitorImpl extends AdvancedCalculatorBaseVisitor
             list.add(visit(data));
         }
         return new ListType(list);
+    }
+
+    @Override
+    public DictionaryType visitDictionary(AdvancedCalculatorParser.DictionaryContext ctx){
+        HashMap<StringType, DataTypeInterface<?>> dictionary = new HashMap<>();
+        List<DataTypeInterface> tempValues = new ArrayList<>();
+        List<StringType> tempKeys = new ArrayList<>();
+        for (AdvancedCalculatorParser.DatacontainerContext data : ctx.datacontainer()){
+            tempValues.add(visit(data));
+        }
+
+        for (TerminalNode data : ctx.VARIABLE()){
+            tempKeys.add(new StringType(data.getText()));
+            //tempKeys.add((StringType)visit(data));
+        }
+
+        for (int i = 0; i < tempKeys.size(); i++){
+            dictionary.put(tempKeys.get(i),tempValues.get(i));
+        }
+        return new DictionaryType(dictionary);
     }
 
     @Override

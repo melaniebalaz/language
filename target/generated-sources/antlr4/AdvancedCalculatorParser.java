@@ -17,8 +17,9 @@ public class AdvancedCalculatorParser extends Parser {
 		new PredictionContextCache();
 	public static final int
 		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, T__7=8, T__8=9, 
-		T__9=10, T__10=11, T__11=12, T__12=13, T__13=14, T__14=15, NUMBER=16, 
-		VARIABLE=17, STRING=18, DIGIT=19, NEWLINE=20, CHARACTER=21, WS=22;
+		T__9=10, T__10=11, T__11=12, T__12=13, T__13=14, T__14=15, T__15=16, T__16=17, 
+		NUMBER=18, VARIABLE=19, STRING=20, DIGIT=21, NEWLINE=22, CHARACTER=23, 
+		WS=24;
 	public static final int
 		RULE_program = 0, RULE_statement = 1, RULE_function = 2, RULE_languageconstruct = 3, 
 		RULE_expression = 4, RULE_datacontainer = 5;
@@ -29,12 +30,12 @@ public class AdvancedCalculatorParser extends Parser {
 
 	private static final String[] _LITERAL_NAMES = {
 		null, "'='", "'('", "','", "')'", "':'", "'.'", "'out: '", "'foreach '", 
-		"'in '", "' do '", "'*'", "'/'", "'+'", "'-'", "'list('"
+		"'in '", "' do '", "'*'", "'/'", "'+'", "'-'", "'list('", "'['", "']'"
 	};
 	private static final String[] _SYMBOLIC_NAMES = {
 		null, null, null, null, null, null, null, null, null, null, null, null, 
-		null, null, null, null, "NUMBER", "VARIABLE", "STRING", "DIGIT", "NEWLINE", 
-		"CHARACTER", "WS"
+		null, null, null, null, null, null, "NUMBER", "VARIABLE", "STRING", "DIGIT", 
+		"NEWLINE", "CHARACTER", "WS"
 	};
 	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
 
@@ -146,7 +147,7 @@ public class AdvancedCalculatorParser extends Parser {
 				setState(17); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__1) | (1L << T__6) | (1L << T__7) | (1L << T__14) | (1L << NUMBER) | (1L << VARIABLE) | (1L << STRING))) != 0) );
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__1) | (1L << T__6) | (1L << T__7) | (1L << T__14) | (1L << T__15) | (1L << NUMBER) | (1L << VARIABLE) | (1L << STRING))) != 0) );
 			}
 		}
 		catch (RecognitionException re) {
@@ -376,7 +377,7 @@ public class AdvancedCalculatorParser extends Parser {
 				setState(46); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__1) | (1L << T__6) | (1L << T__7) | (1L << T__14) | (1L << NUMBER) | (1L << VARIABLE) | (1L << STRING))) != 0) );
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__1) | (1L << T__6) | (1L << T__7) | (1L << T__14) | (1L << T__15) | (1L << NUMBER) | (1L << VARIABLE) | (1L << STRING))) != 0) );
 			setState(48);
 			match(T__5);
 			}
@@ -754,7 +755,7 @@ public class AdvancedCalculatorParser extends Parser {
 				setState(83);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-				while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__1) | (1L << T__14) | (1L << NUMBER) | (1L << VARIABLE) | (1L << STRING))) != 0)) {
+				while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__1) | (1L << T__14) | (1L << T__15) | (1L << NUMBER) | (1L << VARIABLE) | (1L << STRING))) != 0)) {
 					{
 					{
 					setState(73);
@@ -877,6 +878,32 @@ public class AdvancedCalculatorParser extends Parser {
 			super.copyFrom(ctx);
 		}
 	}
+	public static class DictionaryContext extends DatacontainerContext {
+		public List<TerminalNode> VARIABLE() { return getTokens(AdvancedCalculatorParser.VARIABLE); }
+		public TerminalNode VARIABLE(int i) {
+			return getToken(AdvancedCalculatorParser.VARIABLE, i);
+		}
+		public List<DatacontainerContext> datacontainer() {
+			return getRuleContexts(DatacontainerContext.class);
+		}
+		public DatacontainerContext datacontainer(int i) {
+			return getRuleContext(DatacontainerContext.class,i);
+		}
+		public DictionaryContext(DatacontainerContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof AdvancedCalculatorListener ) ((AdvancedCalculatorListener)listener).enterDictionary(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof AdvancedCalculatorListener ) ((AdvancedCalculatorListener)listener).exitDictionary(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof AdvancedCalculatorVisitor ) return ((AdvancedCalculatorVisitor<? extends T>)visitor).visitDictionary(this);
+			else return visitor.visitChildren(this);
+		}
+	}
 	public static class StringContext extends DatacontainerContext {
 		public TerminalNode STRING() { return getToken(AdvancedCalculatorParser.STRING, 0); }
 		public StringContext(DatacontainerContext ctx) { copyFrom(ctx); }
@@ -956,7 +983,7 @@ public class AdvancedCalculatorParser extends Parser {
 		enterRule(_localctx, 10, RULE_datacontainer);
 		int _la;
 		try {
-			setState(120);
+			setState(135);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case NUMBER:
@@ -1013,6 +1040,44 @@ public class AdvancedCalculatorParser extends Parser {
 				match(T__3);
 				}
 				break;
+			case T__15:
+				_localctx = new DictionaryContext(_localctx);
+				enterOuterAlt(_localctx, 5);
+				{
+				setState(120);
+				match(T__15);
+				{
+				setState(121);
+				match(VARIABLE);
+				setState(122);
+				match(T__4);
+				setState(123);
+				datacontainer();
+				setState(130);
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+				while (_la==T__2) {
+					{
+					{
+					setState(124);
+					match(T__2);
+					setState(125);
+					match(VARIABLE);
+					setState(126);
+					match(T__4);
+					setState(127);
+					datacontainer();
+					}
+					}
+					setState(132);
+					_errHandler.sync(this);
+					_la = _input.LA(1);
+				}
+				}
+				setState(133);
+				match(T__16);
+				}
+				break;
 			default:
 				throw new NoViableAltException(this);
 			}
@@ -1050,38 +1115,44 @@ public class AdvancedCalculatorParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\30}\4\2\t\2\4\3\t"+
-		"\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\3\2\3\2\3\2\6\2\22\n\2\r\2\16\2\23"+
-		"\3\3\3\3\3\3\3\3\3\3\5\3\33\n\3\3\4\3\4\3\4\3\4\7\4!\n\4\f\4\16\4$\13"+
-		"\4\7\4&\n\4\f\4\16\4)\13\4\3\4\3\4\3\4\3\4\6\4/\n\4\r\4\16\4\60\3\4\3"+
-		"\4\3\5\3\5\3\5\5\58\n\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\5\5A\n\5\3\6\3\6\3"+
-		"\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\7\6O\n\6\f\6\16\6R\13\6\7\6T\n"+
-		"\6\f\6\16\6W\13\6\3\6\5\6Z\n\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6"+
-		"\3\6\3\6\7\6h\n\6\f\6\16\6k\13\6\3\7\3\7\3\7\3\7\3\7\3\7\3\7\7\7t\n\7"+
-		"\f\7\16\7w\13\7\3\7\3\7\5\7{\n\7\3\7\2\3\n\b\2\4\6\b\n\f\2\2\2\u008b\2"+
-		"\21\3\2\2\2\4\32\3\2\2\2\6\34\3\2\2\2\b@\3\2\2\2\nY\3\2\2\2\fz\3\2\2\2"+
-		"\16\17\5\4\3\2\17\20\7\26\2\2\20\22\3\2\2\2\21\16\3\2\2\2\22\23\3\2\2"+
-		"\2\23\21\3\2\2\2\23\24\3\2\2\2\24\3\3\2\2\2\25\26\7\23\2\2\26\27\7\3\2"+
-		"\2\27\33\5\n\6\2\30\33\5\n\6\2\31\33\5\b\5\2\32\25\3\2\2\2\32\30\3\2\2"+
-		"\2\32\31\3\2\2\2\33\5\3\2\2\2\34\'\7\4\2\2\35\"\7\23\2\2\36\37\7\5\2\2"+
-		"\37!\7\23\2\2 \36\3\2\2\2!$\3\2\2\2\" \3\2\2\2\"#\3\2\2\2#&\3\2\2\2$\""+
-		"\3\2\2\2%\35\3\2\2\2&)\3\2\2\2\'%\3\2\2\2\'(\3\2\2\2(*\3\2\2\2)\'\3\2"+
-		"\2\2*+\7\6\2\2+,\7\7\2\2,.\7\26\2\2-/\5\4\3\2.-\3\2\2\2/\60\3\2\2\2\60"+
-		".\3\2\2\2\60\61\3\2\2\2\61\62\3\2\2\2\62\63\7\b\2\2\63\7\3\2\2\2\64\67"+
-		"\7\t\2\2\658\5\n\6\2\668\7\24\2\2\67\65\3\2\2\2\67\66\3\2\2\28A\3\2\2"+
-		"\29:\7\n\2\2:;\7\23\2\2;<\7\13\2\2<=\5\n\6\2=>\7\f\2\2>?\5\n\6\2?A\3\2"+
-		"\2\2@\64\3\2\2\2@9\3\2\2\2A\t\3\2\2\2BC\b\6\1\2CD\7\4\2\2DE\5\n\6\2EF"+
-		"\7\6\2\2FZ\3\2\2\2GZ\5\f\7\2HZ\5\6\4\2IJ\7\23\2\2JU\7\4\2\2KP\5\n\6\2"+
-		"LM\7\5\2\2MO\5\n\6\2NL\3\2\2\2OR\3\2\2\2PN\3\2\2\2PQ\3\2\2\2QT\3\2\2\2"+
-		"RP\3\2\2\2SK\3\2\2\2TW\3\2\2\2US\3\2\2\2UV\3\2\2\2VX\3\2\2\2WU\3\2\2\2"+
-		"XZ\7\6\2\2YB\3\2\2\2YG\3\2\2\2YH\3\2\2\2YI\3\2\2\2Zi\3\2\2\2[\\\f\t\2"+
-		"\2\\]\7\r\2\2]h\5\n\6\n^_\f\b\2\2_`\7\16\2\2`h\5\n\6\tab\f\7\2\2bc\7\17"+
-		"\2\2ch\5\n\6\bde\f\6\2\2ef\7\20\2\2fh\5\n\6\7g[\3\2\2\2g^\3\2\2\2ga\3"+
-		"\2\2\2gd\3\2\2\2hk\3\2\2\2ig\3\2\2\2ij\3\2\2\2j\13\3\2\2\2ki\3\2\2\2l"+
-		"{\7\22\2\2m{\7\23\2\2n{\7\24\2\2op\7\21\2\2pu\5\f\7\2qr\7\5\2\2rt\5\f"+
-		"\7\2sq\3\2\2\2tw\3\2\2\2us\3\2\2\2uv\3\2\2\2vx\3\2\2\2wu\3\2\2\2xy\7\6"+
-		"\2\2y{\3\2\2\2zl\3\2\2\2zm\3\2\2\2zn\3\2\2\2zo\3\2\2\2{\r\3\2\2\2\20\23"+
-		"\32\"\'\60\67@PUYgiuz";
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\32\u008c\4\2\t\2"+
+		"\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\3\2\3\2\3\2\6\2\22\n\2\r\2\16"+
+		"\2\23\3\3\3\3\3\3\3\3\3\3\5\3\33\n\3\3\4\3\4\3\4\3\4\7\4!\n\4\f\4\16\4"+
+		"$\13\4\7\4&\n\4\f\4\16\4)\13\4\3\4\3\4\3\4\3\4\6\4/\n\4\r\4\16\4\60\3"+
+		"\4\3\4\3\5\3\5\3\5\5\58\n\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\5\5A\n\5\3\6\3"+
+		"\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\7\6O\n\6\f\6\16\6R\13\6\7\6"+
+		"T\n\6\f\6\16\6W\13\6\3\6\5\6Z\n\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6"+
+		"\3\6\3\6\3\6\7\6h\n\6\f\6\16\6k\13\6\3\7\3\7\3\7\3\7\3\7\3\7\3\7\7\7t"+
+		"\n\7\f\7\16\7w\13\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\7\7\u0083"+
+		"\n\7\f\7\16\7\u0086\13\7\3\7\3\7\5\7\u008a\n\7\3\7\2\3\n\b\2\4\6\b\n\f"+
+		"\2\2\2\u009c\2\21\3\2\2\2\4\32\3\2\2\2\6\34\3\2\2\2\b@\3\2\2\2\nY\3\2"+
+		"\2\2\f\u0089\3\2\2\2\16\17\5\4\3\2\17\20\7\30\2\2\20\22\3\2\2\2\21\16"+
+		"\3\2\2\2\22\23\3\2\2\2\23\21\3\2\2\2\23\24\3\2\2\2\24\3\3\2\2\2\25\26"+
+		"\7\25\2\2\26\27\7\3\2\2\27\33\5\n\6\2\30\33\5\n\6\2\31\33\5\b\5\2\32\25"+
+		"\3\2\2\2\32\30\3\2\2\2\32\31\3\2\2\2\33\5\3\2\2\2\34\'\7\4\2\2\35\"\7"+
+		"\25\2\2\36\37\7\5\2\2\37!\7\25\2\2 \36\3\2\2\2!$\3\2\2\2\" \3\2\2\2\""+
+		"#\3\2\2\2#&\3\2\2\2$\"\3\2\2\2%\35\3\2\2\2&)\3\2\2\2\'%\3\2\2\2\'(\3\2"+
+		"\2\2(*\3\2\2\2)\'\3\2\2\2*+\7\6\2\2+,\7\7\2\2,.\7\30\2\2-/\5\4\3\2.-\3"+
+		"\2\2\2/\60\3\2\2\2\60.\3\2\2\2\60\61\3\2\2\2\61\62\3\2\2\2\62\63\7\b\2"+
+		"\2\63\7\3\2\2\2\64\67\7\t\2\2\658\5\n\6\2\668\7\26\2\2\67\65\3\2\2\2\67"+
+		"\66\3\2\2\28A\3\2\2\29:\7\n\2\2:;\7\25\2\2;<\7\13\2\2<=\5\n\6\2=>\7\f"+
+		"\2\2>?\5\n\6\2?A\3\2\2\2@\64\3\2\2\2@9\3\2\2\2A\t\3\2\2\2BC\b\6\1\2CD"+
+		"\7\4\2\2DE\5\n\6\2EF\7\6\2\2FZ\3\2\2\2GZ\5\f\7\2HZ\5\6\4\2IJ\7\25\2\2"+
+		"JU\7\4\2\2KP\5\n\6\2LM\7\5\2\2MO\5\n\6\2NL\3\2\2\2OR\3\2\2\2PN\3\2\2\2"+
+		"PQ\3\2\2\2QT\3\2\2\2RP\3\2\2\2SK\3\2\2\2TW\3\2\2\2US\3\2\2\2UV\3\2\2\2"+
+		"VX\3\2\2\2WU\3\2\2\2XZ\7\6\2\2YB\3\2\2\2YG\3\2\2\2YH\3\2\2\2YI\3\2\2\2"+
+		"Zi\3\2\2\2[\\\f\t\2\2\\]\7\r\2\2]h\5\n\6\n^_\f\b\2\2_`\7\16\2\2`h\5\n"+
+		"\6\tab\f\7\2\2bc\7\17\2\2ch\5\n\6\bde\f\6\2\2ef\7\20\2\2fh\5\n\6\7g[\3"+
+		"\2\2\2g^\3\2\2\2ga\3\2\2\2gd\3\2\2\2hk\3\2\2\2ig\3\2\2\2ij\3\2\2\2j\13"+
+		"\3\2\2\2ki\3\2\2\2l\u008a\7\24\2\2m\u008a\7\25\2\2n\u008a\7\26\2\2op\7"+
+		"\21\2\2pu\5\f\7\2qr\7\5\2\2rt\5\f\7\2sq\3\2\2\2tw\3\2\2\2us\3\2\2\2uv"+
+		"\3\2\2\2vx\3\2\2\2wu\3\2\2\2xy\7\6\2\2y\u008a\3\2\2\2z{\7\22\2\2{|\7\25"+
+		"\2\2|}\7\7\2\2}\u0084\5\f\7\2~\177\7\5\2\2\177\u0080\7\25\2\2\u0080\u0081"+
+		"\7\7\2\2\u0081\u0083\5\f\7\2\u0082~\3\2\2\2\u0083\u0086\3\2\2\2\u0084"+
+		"\u0082\3\2\2\2\u0084\u0085\3\2\2\2\u0085\u0087\3\2\2\2\u0086\u0084\3\2"+
+		"\2\2\u0087\u0088\7\23\2\2\u0088\u008a\3\2\2\2\u0089l\3\2\2\2\u0089m\3"+
+		"\2\2\2\u0089n\3\2\2\2\u0089o\3\2\2\2\u0089z\3\2\2\2\u008a\r\3\2\2\2\21"+
+		"\23\32\"\'\60\67@PUYgiu\u0084\u0089";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

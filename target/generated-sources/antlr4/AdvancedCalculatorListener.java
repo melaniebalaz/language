@@ -234,4 +234,16 @@ public interface AdvancedCalculatorListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitList(AdvancedCalculatorParser.ListContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code dictionary}
+	 * labeled alternative in {@link AdvancedCalculatorParser#datacontainer}.
+	 * @param ctx the parse tree
+	 */
+	void enterDictionary(AdvancedCalculatorParser.DictionaryContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code dictionary}
+	 * labeled alternative in {@link AdvancedCalculatorParser#datacontainer}.
+	 * @param ctx the parse tree
+	 */
+	void exitDictionary(AdvancedCalculatorParser.DictionaryContext ctx);
 }

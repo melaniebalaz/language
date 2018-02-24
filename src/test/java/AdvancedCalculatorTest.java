@@ -1,11 +1,9 @@
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
+import org.antlr.v4.runtime.tree.TerminalNode;
 import org.junit.Assert;
 import org.junit.Test;
-import primitives.DataTypeInterface;
-import primitives.ListType;
-import primitives.NumberType;
-import primitives.StringType;
+import primitives.*;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -14,6 +12,7 @@ import java.io.InputStream;
 import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import static junit.framework.TestCase.assertEquals;
@@ -232,6 +231,29 @@ public class AdvancedCalculatorTest {
         List<BigDecimal> result = new ArrayList<>();
         for (DataTypeInterface value : output.getRawType()){
             result.add((BigDecimal)value.getRawType());
+        }
+        assertTrue(expected.equals(result));
+    }
+
+    @Test
+    public void testDictionary() {
+        AdvancedCalculator calculator = new AdvancedCalculator();
+
+        HashMap<String,BigDecimal> expected = new HashMap<>();
+        expected.put("x",new BigDecimal(2));
+        expected.put("y",new BigDecimal(3));
+        expected.put("z",new BigDecimal(4));
+
+        String input = "var = [x:2,y:3,z:4]" + "\n" +
+                "var" + "\n";
+
+        DictionaryType output = (DictionaryType)calculator
+                .startProgram(convertToCharStream(input), null, null);
+
+        HashMap<String,BigDecimal> result = new HashMap<>();
+
+        for (HashMap.Entry<StringType, DataTypeInterface<?>> entry : output.getRawType().entrySet()) {
+            result.put(entry.getKey().getRawType(),(BigDecimal)entry.getValue().getRawType());
         }
         assertTrue(expected.equals(result));
     }

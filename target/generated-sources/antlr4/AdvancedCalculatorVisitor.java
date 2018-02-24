@@ -142,4 +142,11 @@ public interface AdvancedCalculatorVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitList(AdvancedCalculatorParser.ListContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code dictionary}
+	 * labeled alternative in {@link AdvancedCalculatorParser#datacontainer}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDictionary(AdvancedCalculatorParser.DictionaryContext ctx);
 }
