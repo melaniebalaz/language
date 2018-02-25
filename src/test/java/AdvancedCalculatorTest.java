@@ -271,7 +271,7 @@ public class AdvancedCalculatorTest {
     }
 
     @Test
-    public void testListAppendingNumber() {
+    public void testNumberListAppending() {
         AdvancedCalculator calculator = new AdvancedCalculator();
 
 
@@ -295,7 +295,7 @@ public class AdvancedCalculatorTest {
 
 
     @Test
-    public void testListAppendingString() {
+    public void testStringListAppending() {
         AdvancedCalculator calculator = new AdvancedCalculator();
 
 
@@ -304,14 +304,10 @@ public class AdvancedCalculatorTest {
                 "hello + world" + "\n";
 
         List<String> expected = new ArrayList<>();
-        String hel = "hel";
-        String lo = "lo";
-        String ld = "ld";
-        String wor = "wor";
-        expected.add(hel);
-        expected.add(lo);
-        expected.add(wor);
-        expected.add(ld);
+        expected.add("hel");
+        expected.add("lo");
+        expected.add("wor");
+        expected.add("ld");
         ListType output = (ListType)calculator
                 .startProgram(convertToCharStream(input), null, null);
         List<String> result = new ArrayList<>();
@@ -320,6 +316,50 @@ public class AdvancedCalculatorTest {
         }
         assertTrue(expected.equals(result));
     }
+
+    @Test
+    public void testStringListAppendString() {
+        AdvancedCalculator calculator = new AdvancedCalculator();
+
+
+        String input = "hello = list(\"hello\")" + "\n" +
+                "var = \" world\"" + "\n" +
+                "hello + var" + "\n";
+
+        List<String> expected = new ArrayList<>();
+        expected.add("hello");
+        expected.add(" world");
+        ListType output = (ListType)calculator
+                .startProgram(convertToCharStream(input), null, null);
+        List<String> result = new ArrayList<>();
+        for (DataTypeInterface value : output.getRawType()){
+            result.add((String)value.getRawType());
+        }
+        assertTrue(expected.equals(result));
+    }
+
+    @Test
+    public void testMixedListAppend() {
+        AdvancedCalculator calculator = new AdvancedCalculator();
+
+
+        String input = "hello = list(\"hello\")" + "\n" +
+                "var = 5" + "\n" +
+                "hello + var" + "\n";
+
+        List<Object> expected = new ArrayList<>();
+        expected.add("hello");
+        expected.add(new BigDecimal(5));
+        ListType output = (ListType)calculator
+                .startProgram(convertToCharStream(input), null, null);
+        List<Object> result = new ArrayList<>();
+        for (DataTypeInterface value : output.getRawType()){
+            result.add((Object)value.getRawType());
+        }
+        assertTrue(expected.equals(result));
+    }
+
+
 
 
 
