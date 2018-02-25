@@ -10,10 +10,13 @@ My goals for this language:
 
 #### Implemented functionality:
 
+After each statement there needs to be a newline. The value of whatever is the last statement of 
+a program/function is returned<br>
+
 ###### Datatypes
 The language is dynamically typed, so you do not need to declare variable types.
 
-###### Primitive
+###### Primitives
 **Numbers** (stored as Java BigDecimals) <br>
 `15` <br>
 `15.38` <br>
@@ -22,7 +25,22 @@ The language is dynamically typed, so you do not need to declare variable types.
 **Lists** are declared with <br>
 `list(1,2,3)` <br>
 **Dictionaries** are declared with <br>
-`[x:1,y:2,z:3]`
+`(x:1,y:2,z:3)`
+
+###### Basic Operations
+**Strings** can be appended with the + operator <br>
+```
+"hello " + "world"
+@returns: "hello world"
+```
+
+**Lists** can be appended with the + operator <br>
+```
+var hello = list("h","e","l","l","o")
+var world = list("w","o","r","l","d")
+hello + world
+@returns: list("h","e","l","l","o","w","o","r","l","d")
+```
 
 ###### Language Constructs:
 
@@ -34,7 +52,11 @@ The language is dynamically typed, so you do not need to declare variable types.
 
 ###### Built in Functions:
 *reverse* <br>
-`reverse("String")` <br>
-will return "gnirtS" <br>
-`reverse(list(1,2,3))`  <br>
-will return list(3,2,1)
+```
+reverse("String")
+@returns: "gnirtS"
+```
+```
+reverse(list(1,2,3))
+@returns: list(3,2,1)
+```

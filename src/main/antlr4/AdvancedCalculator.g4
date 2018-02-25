@@ -32,7 +32,7 @@ datacontainer    : NUMBER                                                       
                  | VARIABLE                                                              # var
                  | STRING                                                                # string
                  | 'list('(datacontainer(','datacontainer)*)')'                          # list
-                 | '['(VARIABLE ':' datacontainer(','VARIABLE ':' datacontainer)*)']'    # dictionary
+                 | '('(VARIABLE ':' datacontainer(','VARIABLE ':' datacontainer)*)')'    # dictionary
                  ;
 
 

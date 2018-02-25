@@ -244,7 +244,7 @@ public class AdvancedCalculatorTest {
         expected.put("y",new BigDecimal(3));
         expected.put("z",new BigDecimal(4));
 
-        String input = "var = [x:2,y:3,z:4]" + "\n" +
+        String input = "var = (x:2,y:3,z:4)" + "\n" +
                 "var" + "\n";
 
         DictionaryType output = (DictionaryType)calculator
@@ -257,6 +257,40 @@ public class AdvancedCalculatorTest {
         }
         assertTrue(expected.equals(result));
     }
+
+    @Test
+    public void testStringAppending() {
+        AdvancedCalculator calculator = new AdvancedCalculator();
+        List<BuiltInFunctionInterface> functions = new ArrayList<>();
+        BuiltInFunctionInterface reverse = new ReverseFunction();
+        functions.add(reverse);
+        String input = "\"test variable \" + \"test two\"" + "\n";
+        StringType output = (StringType)calculator
+                .startProgram(convertToCharStream(input), null, functions);
+        assertEquals("test variable test two",output.getRawType());
+    }
+
+    /**
+    @Test
+    public void testListAppending() {
+        AdvancedCalculator calculator = new AdvancedCalculator();
+
+
+        String input = "var hello = list(\"h\",\"e\",\"l\",\"l\",\"o\")\n" +
+                "var world = list(\"w\",\"o\",\"r\",\"l\",\"d\")" + "\n" ;
+
+        List<String> expected = new ArrayList<>();
+        expected.add();
+        ListType output = (ListType)calculator
+                .startProgram(convertToCharStream(input), null, null);
+        List<BigDecimal> result = new ArrayList<>();
+        for (DataTypeInterface value : output.getRawType()){
+            result.add((BigDecimal)value.getRawType());
+        }
+        assertTrue(expected.equals(result));
+    }
+    **/
+
 
 
 }

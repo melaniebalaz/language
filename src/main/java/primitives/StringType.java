@@ -28,7 +28,7 @@ public class StringType implements DataTypeInterface<String>, ReversibleInterfac
 
     @Override
     public StringType add(StringType a) {
-        return new StringType( data + a);
+        return new StringType( data + a.getRawType());
     }
 }
 
