@@ -359,9 +359,4 @@ public class AdvancedCalculatorTest {
         assertTrue(expected.equals(result));
     }
 
-
-
-
-
-
 }
