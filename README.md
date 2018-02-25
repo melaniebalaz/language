@@ -8,10 +8,12 @@ My goals for this language:
 * Sound similar to english, while at the same time not being too verbose
 * Personally learn about concepts like stacks and variable scope
 
-#### Implemented functionality:
+#### General
 
 After each statement there needs to be a newline. The value of whatever is the last statement of 
 a program/function is returned<br>
+Variables can only be set once, operations on this variable (such as appending values to a list) 
+always return a new datacontainer, which needs to be saved.
 
 ###### Datatypes
 The language is dynamically typed, so you do not need to declare variable types.
