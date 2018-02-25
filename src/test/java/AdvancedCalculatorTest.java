@@ -270,17 +270,20 @@ public class AdvancedCalculatorTest {
         assertEquals("test variable test two",output.getRawType());
     }
 
-    /**
     @Test
-    public void testListAppending() {
+    public void testListAppendingNumber() {
         AdvancedCalculator calculator = new AdvancedCalculator();
 
 
-        String input = "var hello = list(\"h\",\"e\",\"l\",\"l\",\"o\")\n" +
-                "var world = list(\"w\",\"o\",\"r\",\"l\",\"d\")" + "\n" ;
+        String input = "hello = list(1,2)" + "\n" +
+                "world = list(3,4)" + "\n" +
+                "hello + world" + "\n";
 
-        List<String> expected = new ArrayList<>();
-        expected.add();
+        List<BigDecimal> expected = new ArrayList<>();
+        expected.add(new BigDecimal(1));
+        expected.add(new BigDecimal(2));
+        expected.add(new BigDecimal(3));
+        expected.add(new BigDecimal(4));
         ListType output = (ListType)calculator
                 .startProgram(convertToCharStream(input), null, null);
         List<BigDecimal> result = new ArrayList<>();
@@ -289,7 +292,35 @@ public class AdvancedCalculatorTest {
         }
         assertTrue(expected.equals(result));
     }
-    **/
+
+
+    @Test
+    public void testListAppendingString() {
+        AdvancedCalculator calculator = new AdvancedCalculator();
+
+
+        String input = "hello = list(\"hel\",\"lo\")" + "\n" +
+                "world = list(\"wor\",\"ld\")" + "\n"  +
+                "hello + world" + "\n";
+
+        List<String> expected = new ArrayList<>();
+        String hel = "hel";
+        String lo = "lo";
+        String ld = "ld";
+        String wor = "wor";
+        expected.add(hel);
+        expected.add(lo);
+        expected.add(wor);
+        expected.add(ld);
+        ListType output = (ListType)calculator
+                .startProgram(convertToCharStream(input), null, null);
+        List<String> result = new ArrayList<>();
+        for (DataTypeInterface value : output.getRawType()){
+            result.add((String)value.getRawType());
+        }
+        assertTrue(expected.equals(result));
+    }
+
 
 
 

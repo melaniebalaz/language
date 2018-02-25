@@ -36,10 +36,10 @@ The language is dynamically typed, so you do not need to declare variable types.
 
 **Lists** can be appended with the + operator <br>
 ```
-var hello = list("h","e","l","l","o")
-var world = list("w","o","r","l","d")
+var hello = list("hel","lo")
+var world = list("wor","ld")
 hello + world
-@returns: list("h","e","l","l","o","w","o","r","l","d")
+@returns: list("hel","lo","wor","ld")
 ```
 
 ###### Language Constructs:

@@ -4,6 +4,7 @@ import operations.AdditionInterface;
 import operations.MultiplicationInterface;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -29,6 +30,13 @@ public class ListType implements DataTypeInterface<List<DataTypeInterface<?>>>,
 
     @Override
     public ListType add(DataTypeInterface a) {
-        return null;
+        List<DataTypeInterface<?>> newList = new ArrayList(data);
+        if (a instanceof ListType ){
+            newList.addAll((Collection<? extends DataTypeInterface<?>>) a.getRawType());
+        }
+        else {
+            newList.add(a);
+        }
+        return new ListType(newList);
     }
 }
