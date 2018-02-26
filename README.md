@@ -104,7 +104,7 @@ Where var is a list on each of which elements x an operation (for example x+1) i
 
 ## Built in Functions:
 
-#### get
+### get
 Allows retrieval of values at certain positions in Lists and Dictionaries.
 
 **List**
@@ -123,7 +123,7 @@ get(var,"y")
 ```
 The first parameter is the Dictionary, the second the key <br>
 
-#### reverse
+### reverse
 ```
 reverse("String")
 //returns: "gnirtS"
