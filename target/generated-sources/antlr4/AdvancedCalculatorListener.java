@@ -1,4 +1,4 @@
-// Generated from AdvancedCalculator.g4 by ANTLR 4.7.1
+// Generated from at.balaz.lang.AdvancedCalculator.g4 by ANTLR 4.7.1
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**

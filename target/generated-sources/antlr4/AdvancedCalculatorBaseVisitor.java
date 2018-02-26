@@ -1,4 +1,4 @@
-// Generated from AdvancedCalculator.g4 by ANTLR 4.7.1
+// Generated from at.balaz.lang.AdvancedCalculator.g4 by ANTLR 4.7.1
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 
 /**
@@ -7,7 +7,7 @@ import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
  * of the available methods.
  *
  * @param <T> The return type of the visit operation. Use {@link Void} for
- * operations with no return type.
+ * at.balaz.lang.operations with no return type.
  */
 public class AdvancedCalculatorBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements AdvancedCalculatorVisitor<T> {
 	/**

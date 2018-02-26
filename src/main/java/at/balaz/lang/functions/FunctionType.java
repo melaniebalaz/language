@@ -1,8 +1,11 @@
+package at.balaz.lang.functions;
+
 import org.antlr.v4.runtime.tree.TerminalNode;
+import at.balaz.lang.AdvancedCalculatorParser;
 
 import java.util.List;
 
-public class FunctionType implements primitives.DataTypeInterface {
+public class FunctionType implements at.balaz.lang.primitives.DataTypeInterface {
 
     private List<TerminalNode> parameters;
     private List<AdvancedCalculatorParser.StatementContext> statements;
@@ -14,7 +17,7 @@ public class FunctionType implements primitives.DataTypeInterface {
 
     @Override
     public Object getRawType() {
-        throw new RuntimeException("getRawType for functions is not supported");
+        throw new RuntimeException("getRawType for at.balaz.lang.functions is not supported");
     }
 
     public List<TerminalNode> getParameters() {

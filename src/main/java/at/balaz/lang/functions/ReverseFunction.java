@@ -1,8 +1,7 @@
-import primitives.DataTypeInterface;
-import primitives.ReversibleInterface;
+package at.balaz.lang.functions;
 
-import java.util.ArrayList;
-import java.util.Collections;
+import at.balaz.lang.primitives.DataTypeInterface;
+
 import java.util.List;
 
 public class ReverseFunction implements BuiltInFunctionInterface {

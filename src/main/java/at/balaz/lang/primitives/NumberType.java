@@ -1,12 +1,11 @@
-package primitives;
+package at.balaz.lang.primitives;
 
-import operations.AdditionInterface;
-import operations.DivisionInterface;
-import operations.MultiplicationInterface;
-import operations.SubtractionInterface;
+import at.balaz.lang.operations.AdditionInterface;
+import at.balaz.lang.operations.DivisionInterface;
+import at.balaz.lang.operations.MultiplicationInterface;
+import at.balaz.lang.operations.SubtractionInterface;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 public class NumberType implements DataTypeInterface<BigDecimal>, AdditionInterface<NumberType>, DivisionInterface<NumberType>, MultiplicationInterface<NumberType>, SubtractionInterface<NumberType> {
     private final BigDecimal data;

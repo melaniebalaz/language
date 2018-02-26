@@ -1,8 +1,10 @@
-import primitives.DataTypeInterface;
+package at.balaz.lang.functions;
+
+import at.balaz.lang.primitives.DataTypeInterface;
 
 import java.util.List;
 
-interface BuiltInFunctionInterface extends DataTypeInterface{
+public interface BuiltInFunctionInterface extends DataTypeInterface{
 
     public String getName();
     public int getParameterCount();

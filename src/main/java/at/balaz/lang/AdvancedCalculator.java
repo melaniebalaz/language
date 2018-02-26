@@ -1,8 +1,12 @@
+package at.balaz.lang;
+
+import at.balaz.lang.functions.BuiltInFunctionInterface;
+import at.balaz.lang.functions.ReverseFunction;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
-import primitives.DataTypeInterface;
+import at.balaz.lang.primitives.DataTypeInterface;
 
 import java.io.IOException;
 import java.io.OutputStream;

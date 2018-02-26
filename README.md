@@ -12,7 +12,7 @@ My goals for this language:
 
 After each statement there needs to be a newline. The value of whatever is the last statement of 
 a program/function is returned<br>
-Variables can only be assigned once, operations on this variable (such as appending values to a list) 
+Variables can only be assigned once, at.balaz.lang.operations on this variable (such as appending values to a list) 
 always return a new datacontainer, which needs to be saved.
 
 **Comments** <br>
@@ -33,7 +33,7 @@ The language is dynamically typed, so you do not need to declare variable types.
 `list(1,2,3)` <br>
 **Dictionaries** are declared with <br>
 `(x:1,y:2,z:3)` <br>
-**Variables** can be assigned any of the above primitives, as well as functions and are declared with <br>
+**Variables** can be assigned any of the above at.balaz.lang.primitives, as well as at.balaz.lang.functions and are declared with <br>
 `var = "content""`
 
 ## Functions
@@ -46,7 +46,7 @@ a+b.
 ```
 The final statement of a function declaration must end with a `.`<br> 
 Function parameters go in the brackets. 
-They can be any of the primitives or a function declaration/call stored in a variable.
+They can be any of the at.balaz.lang.primitives or a function declaration/call stored in a variable.
 In order to use the declared function, it needs to be stored inside a variable.
 ```
 add = (a,b):

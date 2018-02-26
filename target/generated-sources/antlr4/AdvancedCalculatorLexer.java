@@ -1,4 +1,4 @@
-// Generated from AdvancedCalculator.g4 by ANTLR 4.7.1
+// Generated from at.balaz.lang.AdvancedCalculator.g4 by ANTLR 4.7.1
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.Token;
@@ -83,7 +83,7 @@ public class AdvancedCalculatorLexer extends Lexer {
 	}
 
 	@Override
-	public String getGrammarFileName() { return "AdvancedCalculator.g4"; }
+	public String getGrammarFileName() { return "at.balaz.lang.AdvancedCalculator.g4"; }
 
 	@Override
 	public String[] getRuleNames() { return ruleNames; }

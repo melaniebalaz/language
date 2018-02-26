@@ -1,6 +1,6 @@
-package operations;
+package at.balaz.lang.operations;
 
-import primitives.DataTypeInterface;
+import at.balaz.lang.primitives.DataTypeInterface;
 
 public interface AdditionInterface<T extends DataTypeInterface> {
 

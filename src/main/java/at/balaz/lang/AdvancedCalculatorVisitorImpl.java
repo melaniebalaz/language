@@ -1,14 +1,17 @@
-import operations.AdditionInterface;
-import operations.DivisionInterface;
-import operations.MultiplicationInterface;
-import operations.SubtractionInterface;
+package at.balaz.lang;
+
+import at.balaz.lang.functions.BuiltInFunctionInterface;
+import at.balaz.lang.functions.FunctionType;
+import at.balaz.lang.operations.AdditionInterface;
+import at.balaz.lang.operations.DivisionInterface;
+import at.balaz.lang.operations.MultiplicationInterface;
+import at.balaz.lang.operations.SubtractionInterface;
 import org.antlr.v4.runtime.tree.TerminalNode;
-import primitives.*;
+import at.balaz.lang.primitives.*;
 
 import java.io.IOException;
 import java.io.OutputStream;
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.*;
 
 public class AdvancedCalculatorVisitorImpl extends AdvancedCalculatorBaseVisitor<DataTypeInterface> {
@@ -133,40 +136,6 @@ public class AdvancedCalculatorVisitorImpl extends AdvancedCalculatorBaseVisitor
         }
         else throw new RuntimeException("Cannot add " + left.getClass().getName() + " and " + right.getClass().getName());
     }
-
-    /**
-    @Override
-    public DataTypeInterface visitMulDiv(AdvancedCalculatorParser.MulDivContext ctx) {
-        final DataTypeInterface left = visit(ctx.expression(0));
-        final DataTypeInterface right = visit(ctx.expression(1));
-        if (left instanceof BigDecimal && right instanceof BigDecimal){
-            if (ctx.op.getText().equals("*")) {
-                return ((BigDecimal)left).multiply((BigDecimal)right);
-            } else {
-                return ((BigDecimal)left).divide((BigDecimal)right, 9, RoundingMode.HALF_UP);
-            }
-        }
-        else throw new RuntimeException("Cannot perform this operation on these datatypes");
-
-
-    }
-    **/
-
-    /**
-    @Override
-    public DataTypeInterface visitAddSub(AdvancedCalculatorParser.AddSubContext ctx) {
-        final DataTypeInterface left = visit(ctx.expression(0));
-        final DataTypeInterface right = visit(ctx.expression(1));
-        if (left instanceof BigDecimal && right instanceof BigDecimal){
-            if (ctx.op.getText().equals("+")) {
-                return ((BigDecimal)left).add((BigDecimal)right);
-            } else {
-                return ((BigDecimal)left).subtract((BigDecimal)right);
-            }
-        }
-        else throw new RuntimeException("Cannot perform this operation on these datatypes: " +  left.getClass().getName() );
-    }
-     **/
 
     @Override
     public DataTypeInterface visitStart(AdvancedCalculatorParser.StartContext ctx) {

@@ -1,9 +1,13 @@
+package at.balaz.lang;
+
+import at.balaz.lang.AdvancedCalculator;
+import at.balaz.lang.functions.BuiltInFunctionInterface;
+import at.balaz.lang.functions.ReverseFunction;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
-import org.antlr.v4.runtime.tree.TerminalNode;
 import org.junit.Assert;
 import org.junit.Test;
-import primitives.*;
+import at.balaz.lang.primitives.*;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -114,7 +118,7 @@ public class AdvancedCalculatorTest {
     /**
     @Test
     public void testSeveralLiner2() {
-        AdvancedCalculator calculator = new AdvancedCalculator();
+        at.balaz.lang.AdvancedCalculator calculator = new at.balaz.lang.AdvancedCalculator();
 
         String input = "t = 100" + "\n" +
                 "s = 200" + "\n" +

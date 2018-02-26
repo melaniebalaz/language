@@ -1,7 +1,7 @@
-package primitives;
+package at.balaz.lang.primitives;
 
-import operations.AdditionInterface;
-import operations.MultiplicationInterface;
+import at.balaz.lang.functions.ReversibleInterface;
+import at.balaz.lang.operations.AdditionInterface;
 
 public class StringType implements DataTypeInterface<String>, ReversibleInterface<StringType>,
         AdditionInterface<StringType> {

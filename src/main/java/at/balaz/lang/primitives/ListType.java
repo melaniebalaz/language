@@ -1,7 +1,8 @@
-package primitives;
+package at.balaz.lang.primitives;
 
-import operations.AdditionInterface;
-import operations.MultiplicationInterface;
+import at.balaz.lang.functions.GetInterface;
+import at.balaz.lang.functions.ReversibleInterface;
+import at.balaz.lang.operations.AdditionInterface;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -9,7 +10,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class ListType implements DataTypeInterface<List<DataTypeInterface<?>>>,
-        ReversibleInterface, AdditionInterface {
+        ReversibleInterface, AdditionInterface, GetInterface {
     private final List<DataTypeInterface<?>> data;
 
     public ListType(List<DataTypeInterface<?>> data) {

@@ -1,6 +1,5 @@
-package primitives;
+package at.balaz.lang.primitives;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class DictionaryType implements DataTypeInterface<Map<StringType,DataTypeInterface<?>>> {
