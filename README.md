@@ -27,8 +27,35 @@ The language is dynamically typed, so you do not need to declare variable types.
 **Lists** are declared with <br>
 `list(1,2,3)` <br>
 **Dictionaries** are declared with <br>
-`(x:1,y:2,z:3)`
+`(x:1,y:2,z:3)` <br>
+**Variables** can be assigned any of the above primitives, as well as functions and are declared with <br>
+`var = "content""`
 
+###### Functions
+
+**Function Declaration**  <br>
+Functions are declared with 
+```
+(a,b):
+a+b.
+```
+The final statement of a function declaration must end with a `.`<br> 
+Function parameters go in the brackets. 
+They can be any of the primitives or a function declaration/call stored in a variable.
+In order to use the declared function, it needs to be stored inside a variable.
+```
+add = (a,b):
+a+b.
+``` 
+ 
+**Function Call**  <br>
+
+Functions can be called with
+```
+add = (a,b):
+a+b.
+add(2,3)
+```
 ###### Basic Operations
 **Strings** can be appended with the + operator <br>
 ```
