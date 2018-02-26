@@ -71,6 +71,9 @@ public class AdvancedCalculatorVisitorImpl extends AdvancedCalculatorBaseVisitor
     public DataTypeInterface visitAssignment(AdvancedCalculatorParser.AssignmentContext ctx) {
         final String variableName = (ctx.VARIABLE().getText());
         final DataTypeInterface right = visit(ctx.expression());
+        if (variables.containsKey(variableName)){
+            throw new RuntimeException("The variable " + variableName + " cannot be reassigned!");
+        }
         this.variables.put(variableName,right);
         return right;
     }

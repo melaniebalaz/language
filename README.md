@@ -60,7 +60,7 @@ add(2,3)
 **Strings** can be appended with the + operator <br>
 ```
 "hello " + "world"
-@returns: "hello world"
+//returns: "hello world"
 ```
 
 **Lists** can be appended with the + operator <br>
@@ -68,21 +68,21 @@ add(2,3)
 hello = list("hel","lo")
 world = list("wor","ld")
 hello + world
-@returns: list("hel","lo","wor","ld")
+//returns: list("hel","lo","wor","ld")
 ```
 
 ```
 hello = list("hel","lo")
 var = list(1,2)
 hello + var
-@returns: list("hel","lo",1,2)
+//returns: list("hel","lo",1,2)
 ```
 
 ```
 hello = list("hel","lo")
 var = 3
 hello + var
-@returns: list("hel","lo",3)
+//returns: list("hel","lo",3)
 ```
 
 ###### Language Constructs:
@@ -97,9 +97,9 @@ hello + var
 *reverse* <br>
 ```
 reverse("String")
-@returns: "gnirtS"
+//returns: "gnirtS"
 ```
 ```
 reverse(list(1,2,3))
-@returns: list(3,2,1)
+//returns: list(3,2,1)
 ```
