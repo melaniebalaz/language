@@ -6,6 +6,7 @@ program     : (statement NEWLINE)+                  #start
 statement   : VARIABLE '=' expression                          # assignment
             | expression                                       # express
             | languageconstruct                                # standardmethods
+            | '\\'COMMENT                                      # comment
             ;
 
 
@@ -44,4 +45,5 @@ STRING      :   '"' ([ \t] | CHARACTER)* '"' ;
 DIGIT       :   [0-9];
 NEWLINE     :   '\r'? '\n' ;
 CHARACTER   :   ('a' .. 'z') | ('A' .. 'Z') ;
+COMMENT     :   ([ \t] | CHARACTER)*
 WS          :   [ \t]+ -> skip ;

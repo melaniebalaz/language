@@ -12,13 +12,13 @@ My goals for this language:
 
 After each statement there needs to be a newline. The value of whatever is the last statement of 
 a program/function is returned<br>
-Variables can only be set once, operations on this variable (such as appending values to a list) 
+Variables can only be assigned once, operations on this variable (such as appending values to a list) 
 always return a new datacontainer, which needs to be saved.
 
-###### Datatypes
+##### Datatypes
 The language is dynamically typed, so you do not need to declare variable types.
 
-###### Primitives
+##### Primitives
 **Numbers** (stored as Java BigDecimals) <br>
 `15` <br>
 `15.38` <br>
@@ -31,7 +31,7 @@ The language is dynamically typed, so you do not need to declare variable types.
 **Variables** can be assigned any of the above primitives, as well as functions and are declared with <br>
 `var = "content""`
 
-###### Functions
+##### Functions
 
 **Function Declaration**  <br>
 Functions are declared with 
@@ -56,7 +56,7 @@ add = (a,b):
 a+b.
 add(2,3)
 ```
-###### Basic Operations
+##### Basic Operations
 **Strings** can be appended with the + operator <br>
 ```
 "hello " + "world"
@@ -85,15 +85,17 @@ hello + var
 //returns: list("hel","lo",3)
 ```
 
-###### Language Constructs:
+##### Language Constructs:
 
 *printing* <br>
 `out: var`
 
-*loops* <br>
-`foreach x in var do x+1`
+###### loops
+**Foreach Loop** <br>
+`foreach x in var do x+1` <br>
+Where var is a list on each of which elements x an operation (for example x+1) is performed
 
-###### Built in Functions:
+##### Built in Functions:
 *reverse* <br>
 ```
 reverse("String")
