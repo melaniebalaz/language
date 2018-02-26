@@ -1,6 +1,7 @@
 package at.balaz.lang;
 
 import at.balaz.lang.functions.BuiltInFunctionInterface;
+import at.balaz.lang.functions.GetFunction;
 import at.balaz.lang.functions.ReverseFunction;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
@@ -18,7 +19,9 @@ public class AdvancedCalculator {
     public static void main(String[] args) throws IOException {
         List<BuiltInFunctionInterface> functions = new ArrayList<>();
         BuiltInFunctionInterface reverse = new ReverseFunction();
+        BuiltInFunctionInterface get = new GetFunction();
         functions.add(reverse);
+        functions.add(get);
         runProgram("program1.txt",System.out, functions);
     }
 

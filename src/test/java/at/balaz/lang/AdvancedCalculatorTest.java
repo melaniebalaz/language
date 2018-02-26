@@ -2,6 +2,7 @@ package at.balaz.lang;
 
 import at.balaz.lang.AdvancedCalculator;
 import at.balaz.lang.functions.BuiltInFunctionInterface;
+import at.balaz.lang.functions.GetFunction;
 import at.balaz.lang.functions.ReverseFunction;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
@@ -375,5 +376,21 @@ public class AdvancedCalculatorTest {
         assertEquals(new BigDecimal(10), (output.getRawType()));
 
     }
+
+    @Test
+    public void testListGet(){
+        AdvancedCalculator calculator = new AdvancedCalculator();
+        List<BuiltInFunctionInterface> functions = new ArrayList<>();
+        BuiltInFunctionInterface get = new GetFunction();
+        functions.add(get);
+
+        String input = "hello = list(1,2,3,4)" + "\n" +
+                "get(hello,3)" + "\n";
+        NumberType output = (NumberType)calculator
+                .startProgram(convertToCharStream(input), null, functions);
+        assertEquals(new BigDecimal(3), (output.getRawType()));
+
+    }
+
 
 }

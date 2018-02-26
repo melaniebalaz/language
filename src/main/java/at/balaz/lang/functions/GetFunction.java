@@ -19,7 +19,14 @@ public class GetFunction implements BuiltInFunctionInterface{
 
     @Override
     public DataTypeInterface execute(List<DataTypeInterface> parameters) {
-        return null;
+
+        if (parameters.size()>2){
+            throw new RuntimeException("Incorrect number of parameters");
+        }
+        if (parameters.get(0) instanceof GetInterface){
+            return ((GetInterface) parameters.get(0)).getData(parameters.get(1));
+        }
+        else throw new RuntimeException("The get function cannot be executed on a " + parameters.get(0).getClass().getSimpleName());
     }
 
     @Override

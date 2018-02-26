@@ -10,7 +10,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class ListType implements DataTypeInterface<List<DataTypeInterface<?>>>,
-        ReversibleInterface, AdditionInterface, GetInterface {
+        ReversibleInterface, AdditionInterface, GetInterface<NumberType> {
     private final List<DataTypeInterface<?>> data;
 
     public ListType(List<DataTypeInterface<?>> data) {
@@ -39,5 +39,11 @@ public class ListType implements DataTypeInterface<List<DataTypeInterface<?>>>,
             newList.add(a);
         }
         return new ListType(newList);
+    }
+
+    @Override
+    public DataTypeInterface getData(NumberType position) {
+        int index = position.getRawType().intValue()-1;
+        return data.get(index);
     }
 }
