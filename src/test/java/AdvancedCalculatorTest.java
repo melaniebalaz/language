@@ -359,4 +359,17 @@ public class AdvancedCalculatorTest {
         assertTrue(expected.equals(result));
     }
 
+    @Test
+    public void testComment(){
+        AdvancedCalculator calculator = new AdvancedCalculator();
+
+        String input = "test = 4 + 5"+"\n" +
+                "//this is a comment" + "\n" +
+                "test + 1" +"\n";
+        NumberType output = (NumberType)calculator
+                .startProgram(convertToCharStream(input), null, null);
+        assertEquals(new BigDecimal(10), (output.getRawType()));
+
+    }
+
 }

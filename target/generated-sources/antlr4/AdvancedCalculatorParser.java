@@ -18,7 +18,8 @@ public class AdvancedCalculatorParser extends Parser {
 	public static final int
 		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, T__7=8, T__8=9, 
 		T__9=10, T__10=11, T__11=12, T__12=13, T__13=14, T__14=15, NUMBER=16, 
-		VARIABLE=17, STRING=18, DIGIT=19, NEWLINE=20, CHARACTER=21, WS=22;
+		VARIABLE=17, STRING=18, DIGIT=19, NEWLINE=20, CHARACTER=21, COMMENT=22, 
+		WS=23;
 	public static final int
 		RULE_program = 0, RULE_statement = 1, RULE_function = 2, RULE_languageconstruct = 3, 
 		RULE_expression = 4, RULE_datacontainer = 5;
@@ -34,7 +35,7 @@ public class AdvancedCalculatorParser extends Parser {
 	private static final String[] _SYMBOLIC_NAMES = {
 		null, null, null, null, null, null, null, null, null, null, null, null, 
 		null, null, null, null, "NUMBER", "VARIABLE", "STRING", "DIGIT", "NEWLINE", 
-		"CHARACTER", "WS"
+		"CHARACTER", "COMMENT", "WS"
 	};
 	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
 
@@ -1114,7 +1115,7 @@ public class AdvancedCalculatorParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\30\u008c\4\2\t\2"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\31\u008c\4\2\t\2"+
 		"\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\3\2\3\2\3\2\6\2\22\n\2\r\2\16"+
 		"\2\23\3\3\3\3\3\3\3\3\3\3\5\3\33\n\3\3\4\3\4\3\4\3\4\7\4!\n\4\f\4\16\4"+
 		"$\13\4\7\4&\n\4\f\4\16\4)\13\4\3\4\3\4\3\4\3\4\6\4/\n\4\r\4\16\4\60\3"+

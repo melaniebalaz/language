@@ -15,6 +15,11 @@ a program/function is returned<br>
 Variables can only be assigned once, operations on this variable (such as appending values to a list) 
 always return a new datacontainer, which needs to be saved.
 
+**Comments** <br>
+Single-line comments <br>
+`//This is a comment`
+
+
 ## Datatypes
 The language is dynamically typed, so you do not need to declare variable types.
 

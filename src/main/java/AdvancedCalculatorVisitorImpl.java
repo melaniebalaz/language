@@ -92,6 +92,7 @@ public class AdvancedCalculatorVisitorImpl extends AdvancedCalculatorBaseVisitor
         return this.variables.get(variableName);
     }
 
+
     @Override
     public DataTypeInterface visitParens(AdvancedCalculatorParser.ParensContext ctx) {
         return visit(ctx.expression());
