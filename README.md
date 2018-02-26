@@ -103,7 +103,27 @@ hello + var
 Where var is a list on each of which elements x an operation (for example x+1) is performed
 
 ## Built in Functions:
-*reverse* <br>
+
+#### get
+Allows retrieval of values at certain positions in Lists and Dictionaries.
+
+**List**
+```
+hello = list(1,2,3,4)
+get(hello,3)
+//Returns 3
+```
+The first parameter is the List, the second the index position starting at 1 <br>
+
+**Dictionary**
+```
+var = (x:2,y:3,z:4)
+get(var,"y")
+//Returns 3
+```
+The first parameter is the Dictionary, the second the key <br>
+
+#### reverse
 ```
 reverse("String")
 //returns: "gnirtS"
