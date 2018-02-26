@@ -30,5 +30,22 @@ public class StringType implements DataTypeInterface<String>, ReversibleInterfac
     public StringType add(StringType a) {
         return new StringType( data + a.getRawType());
     }
+
+    @Override
+    public boolean equals(Object a){
+        if (a instanceof StringType){
+            StringType str = (StringType)a;
+            return (data.equals(str.getRawType()));
+        }
+        else {
+            return false;
+        }
+
+    }
+
+    @Override
+    public int hashCode() {
+        return data.hashCode();
+    }
 }
 

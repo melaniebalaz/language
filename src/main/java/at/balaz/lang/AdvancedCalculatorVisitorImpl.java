@@ -90,7 +90,7 @@ public class AdvancedCalculatorVisitorImpl extends AdvancedCalculatorBaseVisitor
     public DataTypeInterface visitVar(AdvancedCalculatorParser.VarContext ctx){
         String variableName = (ctx.VARIABLE().getText());
         if (!this.variables.containsKey(variableName)){
-            throw new RuntimeException("Variable not set");
+            throw new RuntimeException(variableName + " not set");
         }
         return this.variables.get(variableName);
     }

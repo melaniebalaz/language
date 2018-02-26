@@ -393,4 +393,21 @@ public class AdvancedCalculatorTest {
     }
 
 
+    @Test
+    public void testDictionaryGet(){
+        AdvancedCalculator calculator = new AdvancedCalculator();
+        List<BuiltInFunctionInterface> functions = new ArrayList<>();
+        BuiltInFunctionInterface get = new GetFunction();
+        functions.add(get);
+
+        String input = "var = (x:2,y:3,z:4)" + "\n" +
+                "get(var,\"y\")" + "\n";
+
+        NumberType output = (NumberType)calculator
+                .startProgram(convertToCharStream(input), null, functions);
+        assertEquals(new BigDecimal(3), (output.getRawType()));
+    }
+
+
+
 }

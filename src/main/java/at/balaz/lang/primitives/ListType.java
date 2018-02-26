@@ -42,7 +42,7 @@ public class ListType implements DataTypeInterface<List<DataTypeInterface<?>>>,
     }
 
     @Override
-    public DataTypeInterface getData(NumberType position) {
+    public DataTypeInterface<?> getData(NumberType position) {
         int index = position.getRawType().intValue()-1;
         return data.get(index);
     }
