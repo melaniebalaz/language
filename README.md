@@ -15,7 +15,7 @@ a program/function is returned<br>
 Variables can only be assigned once, at.balaz.lang.operations on this variable (such as appending values to a list) 
 always return a new datacontainer, which needs to be saved.
 
-**Comments** <br>
+*Comments* <br>
 Single-line comments <br>
 `//This is a comment`
 
@@ -24,21 +24,21 @@ Single-line comments <br>
 The language is dynamically typed, so you do not need to declare variable types.
 
 ## Primitives
-**Numbers** (stored as Java BigDecimals) <br>
+*Numbers* (stored as Java BigDecimals) <br>
 `15` <br>
 `15.38` <br>
-**Strings** are declared with double quotes "" <br>
+*Strings* are declared with double quotes "" <br>
 `"string"` <br>
-**Lists** are declared with <br>
+*Lists* are declared with <br>
 `list(1,2,3)` <br>
-**Dictionaries** are declared with <br>
+*Dictionaries* are declared with <br>
 `(x:1,y:2,z:3)` <br>
-**Variables** can be assigned any of the above at.balaz.lang.primitives, as well as at.balaz.lang.functions and are declared with <br>
+*Variables* can be assigned any of the above at.balaz.lang.primitives, as well as at.balaz.lang.functions and are declared with <br>
 `var = "content""`
 
 ## Functions
 
-**Function Declaration**  <br>
+*Function Declaration*  <br>
 Functions are declared with 
 ```
 (a,b):
@@ -53,7 +53,7 @@ add = (a,b):
 a+b.
 ``` 
  
-**Function Call**  <br>
+*Function Call*  <br>
 
 Functions can be called with
 ```
@@ -62,15 +62,15 @@ a+b.
 add(2,3)
 ```
 ## Basic Operations
-**Numbers** can be added, subtracted, multiplied and divided with `+ - * /` <br>
+*Numbers* can be added, subtracted, multiplied and divided with `+ - * /` <br>
 
-**Strings** can be appended with the + operator <br>
+*Strings* can be appended with the + operator <br>
 ```
 "hello " + "world"
 //returns: "hello world"
 ```
 
-**Lists** can be appended with the + operator <br>
+*Lists* can be appended with the + operator <br>
 ```
 hello = list("hel","lo")
 world = list("wor","ld")
@@ -98,7 +98,7 @@ hello + var
 `out: var`
 
 ### Loops
-**Foreach Loop** <br>
+*Foreach Loop* <br>
 `foreach x in var do x+1` <br>
 Where var is a list on each of which elements x an operation (for example x+1) is performed
 
@@ -107,7 +107,7 @@ Where var is a list on each of which elements x an operation (for example x+1) i
 ### get
 Allows retrieval of values at certain positions in Lists and Dictionaries.
 
-**List**
+*List*
 ```
 hello = list(1,2,3,4)
 get(hello,3)
@@ -115,7 +115,7 @@ get(hello,3)
 ```
 The first parameter is the List, the second the index position starting at 1 <br>
 
-**Dictionary**
+*Dictionary*
 ```
 var = (x:2,y:3,z:4)
 get(var,"y")
