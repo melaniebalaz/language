@@ -57,6 +57,8 @@ a+b.
 add(2,3)
 ```
 ## Basic Operations
+**Numbers** can be added, subtracted, multiplied and divided with `+ - * /` <br>
+
 **Strings** can be appended with the + operator <br>
 ```
 "hello " + "world"
@@ -90,7 +92,7 @@ hello + var
 *printing* <br>
 `out: var`
 
-### loops
+### Loops
 **Foreach Loop** <br>
 `foreach x in var do x+1` <br>
 Where var is a list on each of which elements x an operation (for example x+1) is performed
