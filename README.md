@@ -1,3 +1,6 @@
+#MoPL
+*My own programming language*
+
 This project started out as a very short project for University, where the goal was to implement a language parser
 using ANTLR for a simple calculator. I have been working on further extending the language since then.
 
@@ -39,6 +42,7 @@ The language is dynamically typed, so you do not need to declare variable types.
 ## Functions
 
 *Function Declaration*  <br>
+
 Functions are declared with 
 ```
 (a,b):
