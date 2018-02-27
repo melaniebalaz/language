@@ -1,4 +1,4 @@
-#MoPL
+# MoPL
 *My own programming language*
 
 This project started out as a very short project for University, where the goal was to implement a language parser
